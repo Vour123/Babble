@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
 
     members = db.relationship('Server', secondary='members', back_populates='user', cascade='all, delete')
     messages = db.relationship('Message', back_populates='user', cascade='all, delete')
-    servers = db.relationship('Server', back_populates='user', cascae='all, delete')
+    servers = db.relationship('Server', back_populates='user', cascade='all, delete')
 
     @property
     def password(self):
