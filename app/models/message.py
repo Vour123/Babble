@@ -11,8 +11,8 @@ class Message(db.Model):
     created_at = db.Column(db.DateTime(), nullable=False, server_default=func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default=func.now())
 
-    channel = db.relationship('Channel', back_populates='messages')
-    owner = db.relationship('User', back_populates='messages')
+    channels = db.relationship('Channel', back_populates='messages')
+    users = db.relationship('User', back_populates='messages')
 
     def to_dict(self):
         return {

@@ -2,9 +2,9 @@ from app.models import db, Server
 
 def seed_servers():
     test_server = Server(
-        user='test', 
+        name='test', 
         image_url='https://www.racksolutions.com/news//app/uploads/AdobeStock_90603827-scaled.jpeg',
-        private = 'false',
+        private = False,
         owner_id = 1
         )
 
