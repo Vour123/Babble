@@ -7,6 +7,9 @@ def seed_messages():
         owner_id = '1'
     )
 
+    db.session.add(message_1)
+    db.session.commit()
+    
 def undo_messages():
     db.session.execute('TRUNCATE messages RESTART IDENTITY CASCADE')
     db.session.commit()
