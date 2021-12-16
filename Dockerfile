@@ -4,7 +4,7 @@ WORKDIR /react-app
 COPY react-app/. .
 
 # You have to set this because it should be set during build time.
-ENV REACT_APP_BASE_URL=https://babble-jc.herokuapp.compipenv lock -r > requirements.txt
+ENV REACT_APP_BASE_URL=https://babble-jc.herokuapp.compipenv
 
 
 # Build our React App
