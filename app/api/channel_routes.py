@@ -13,6 +13,20 @@ channel_routes = Blueprint('channels', __name__)
 def channels(id):
     channels = Channel.query.filter(Channel.server_id == id)
     return {'channels': [channel.to_dict() for channel in channels]}
+    
+#this is the server to delete a specific channel in a server
+@channel_routes.route('/<int:server_id>/<int:channel_id>', methods=['DELETE'])
+@login_required
+def delete_channel(server_id, channel_id):
+    server = Server.query.get(+server_id)
+    if server.owner_id == current_user.id:
+        channel = Channel.query.get(+channel_id)
+        # websocket delete
+        db.session.delete(channel)
+        db.session.commit()
+        return {'status:' : 'success'}
+    else:
+        return {'status': 'failed'}
 
 # this is the route to create a new channel in a server, it uses the server id.
 @channel_routes.route('/<int:server_id>', methods=['POST'])
@@ -47,16 +61,3 @@ def update_channel(server_id, channel_id):
         return channel.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-#this is the server to delete a specific channel in a server
-@channel_routes.route('/<int:server_id>/<int:channel_id>', methods=['DELETE'])
-@login_required
-def delete_channel(server_id, channel_id):
-    server = Server.query.get(+server_id)
-    if server.owner_id == current_user.id:
-        channel = Channel.query.get(+channel_id)
-        # websocket delete
-        db.session.delete(channel)
-        db.session.commit()
-        return {'status:' : 'success'}
-    else:
-        return {'status': 'failed'}
