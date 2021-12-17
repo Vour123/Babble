@@ -47,6 +47,10 @@ a{
     padding: 0;
 }
 
+#logout{
+    margin-right: 1rem;
+}
+
 .nav-btn:hover{
     border: none;
     background-color: #2D93AD;
