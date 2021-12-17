@@ -19,7 +19,7 @@ def get_all_servers():
 @server_routes.route('/:server_id', methods=['DELETE'])
 @login_required
 def delete_specific_server(server_id):
-    specific_server = Server.query.get(+id)
+    specific_server = Server.query.get(int(id))
     # now that we have the server, we must check if its the owner deleting it.
     if current_user.id == Server.owner_id:
         # web socket stuff?
@@ -52,7 +52,7 @@ def new_server(server_id):
 @server_routes.route('/:server_id', methods=['PUT'])
 @login_required
 def update_server(server_id):
-    specific_server = Server.query.get(+server_id)
+    specific_server = Server.query.get(int(server_id))
     form = EditServerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit() and current_user.id == specific_server.owner_id:

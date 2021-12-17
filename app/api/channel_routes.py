@@ -18,9 +18,9 @@ def channels(id):
 @channel_routes.route('/<int:server_id>/<int:channel_id>', methods=['DELETE'])
 @login_required
 def delete_channel(server_id, channel_id):
-    server = Server.query.get(+server_id)
+    server = Server.query.get(int(server_id))
     if server.owner_id == current_user.id:
-        channel = Channel.query.get(+channel_id)
+        channel = Channel.query.get(int(channel_id))
         # websocket delete
         db.session.delete(channel)
         db.session.commit()
@@ -34,7 +34,7 @@ def delete_channel(server_id, channel_id):
 def post_channel(server_id):
     form = CreateChannelForm()
     form['csrf_token'].data= request.cookies['csrf_token']
-    server = Server.query.get(+server_id)
+    server = Server.query.get(int(server_id))
     if form.validate_on_submit() and (server.owner_id == current_user.id):
         channel = Channel(
             name = form.data['name'],
@@ -52,9 +52,9 @@ def post_channel(server_id):
 def update_channel(server_id, channel_id):
     form = EditChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    server = Server.query.get(+server_id)
+    server = Server.query.get(int(server_id))
     if form.validate_on_submit() and (server.owner_id == current_user.id):
-        channel = Channel.query.get(+channel_id)
+        channel = Channel.query.get(int(channel_id))
         channel.name = form.data['name']
         db.session.commit()
         # implement web socket for updating the channel name
