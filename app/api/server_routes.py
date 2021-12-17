@@ -9,11 +9,11 @@ server_routes = Blueprint('servers', __name__)
 
 # i think we want to grab all the servers that belong to a user so we can display those
 @server_routes.route('/')
-# @login_required
+@login_required
 def get_all_servers():
     servers = Server.query.all()
     if servers:
-        return {'servers': servers.to_dict() for servers in servers}
+        return {'servers': [servers.to_dict() for servers in servers]}
 
 # delete server route
 @server_routes.route('/:server_id', methods=['DELETE'])
