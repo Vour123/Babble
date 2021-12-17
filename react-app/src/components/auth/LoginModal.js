@@ -7,10 +7,9 @@ import {login} from '../../store/session';
 function LoginModal(){
     const dispatch = useDispatch()
     const [showModal, setShowModal] = useState(false)
-    // const demoLogin = async() => {
-    //     await dispatch(login('demo@aa.io', 'password'));
-
-    // }
+    const demoLogin = async() => {
+        await dispatch(login('demo@aa.io', 'password'));
+    }
 
     return (
         <>
@@ -20,10 +19,9 @@ function LoginModal(){
                 <LoginForm />
             </Modal>
         )}
-        <div className="nav-btn" id='demo'>Demo Login</div>
+        <div className="nav-btn" id='demo' onClick={demoLogin}>Demo Login</div>
         </>
     )
 } 
-// i love u 
 
 export default LoginModal
