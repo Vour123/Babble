@@ -1,10 +1,8 @@
-from flask import Blueprint, request 
+from flask import Blueprint
 from flask_login.utils import login_required
 from flask_login import login_required, current_user
-from flask_migrate import current
 from app.models import db, Server, User, server
 from app.models.member import Member
-from .auth_routes import validation_errors_to_error_messages
 
 member_routes = Blueprint('members', __name__)
 
@@ -24,7 +22,7 @@ def add_new_member_to_server(server_id, member_id):
         return server.to_dict()
     return {"errors": "Cannot add user to server"}
 
-@member_routes.route('<int:server_id>/members/<int:member_id>', methods=['DELETE'])
+@member_routes.route('/<int:server_id>/members/<int:member_id>', methods=['DELETE'])
 @login_required
 def delete_existing_member_from_server(server_id):
     existing_user = User.query.get(int(current_user.id))
@@ -38,7 +36,7 @@ def delete_existing_member_from_server(server_id):
         return {"status": "success"}
     return {"stauts": "failure"}
 
-@member_routes.routes('<int:server_id>/members', methods=['PUT'])
+@member_routes.route('/<int:server_id>/members', methods=['PUT'])
 @login_required
 def edit_members_on_existing_server(server_idP):
     user = User.query.get(int(current_user.id))
