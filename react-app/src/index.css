@@ -37,9 +37,14 @@ a{
     border-radius: 3px;
     padding: 0.25rem 1rem;
     border: 1.5px solid white;
-    font-size: 1.025rem;
+    font-size: 1rem;
     font-weight: 500;
     box-sizing: border-box;
+}
+
+#demo{
+    font-size: .95rem;
+    padding: 0;
 }
 
 .nav-btn:hover{
