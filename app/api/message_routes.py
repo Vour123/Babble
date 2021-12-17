@@ -37,7 +37,7 @@ def sending_a_new_message(server_idP, channel_idP):
 
 @message_routes.route('/<int:server_id>/<int:channel_id>/<int:message_id>', methods=['PUT'])
 @login_required
-def edit_an_existing_messag(server_id, channel_id, message_id):
+def edit_an_existing_message(server_id, channel_id, message_id):
     form = EditMessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     existing_message = Message.query.get(int(message_id))
@@ -49,3 +49,17 @@ def edit_an_existing_messag(server_id, channel_id, message_id):
         # web socket to edit message
         return message.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@message_routes.route('/<int:server_id>/<int:channel_id>/<int:message_id>', methods=['DELETE'])
+@login_required
+def delete_an_existing_message(server_id, channel_id, message_id):
+    existing_message = Message.query.get(int(message_id))
+    if existing_message.owner_id == current_user.id:
+        specific_server = Server.query.get(int(server_id))
+        server_information = server.to_dict()
+        #web socket to delete the message
+        db.session.delete(existing_message)
+        db.session.commit()
+        return {'result': 'success'}
+    else: 
+        return {'result': 'failure'}
