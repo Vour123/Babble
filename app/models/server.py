@@ -14,6 +14,9 @@ class Server(db.Model):
     members = db.relationship('User', secondary='members', back_populates='servers')
     channels = db.relationship('Channel', back_populates='servers', cascade='all, delete')
 
+    def user_id(self):
+        return [user.id for user in self.members]
+
     def to_dict(self):
         if self.private and len(self.channels):
             channel = self.channels[0].to_dict()
