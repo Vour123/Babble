@@ -1,10 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: 'Raleway', sans-serif;
+}
+
+body{
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
 .nav-bar-container{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.nav-btn > a{
+.user-btns-container{
+    display: flex;
+    gap: 2rem;
+    margin-right: 1rem;
+    min-height: 100%;
+}
+
+.nav-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
-    color: black;
+    color: white;
+    height: 2.5rem;
+    width: 6rem;
+    background-color: transparent;
+    border-radius: 3px;
+    padding: 0.25rem 1rem;
+    border: 1.5px solid white;
+    font-size: 1.025rem;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+.nav-btn:hover{
+    border: none;
+    background-color: #2D93AD;
+}
+
+.nav-bar{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    min-height: 6rem;
+    align-items: center;
+    background-color: #7D7C84;
+}
+
+.babble-logo{
+    height: 4rem;
+    width: auto;
+    margin-left: 1rem;
+}
+
+.babble-title{
+    font-size: 6vh;
+    color: white;
+    font-weight: 200;
+}
+
+.title-container{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: .5rem;
 }
