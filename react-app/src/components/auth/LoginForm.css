@@ -1,0 +1,10 @@
+.login-form-container{
+    display: flex;
+    height: 15rem;
+    width: 30rem;
+    flex-direction: column;
+    background-color: #7d7c84;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
