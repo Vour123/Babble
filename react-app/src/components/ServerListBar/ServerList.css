@@ -1,0 +1,17 @@
+.single-server-image{
+    width: 4vw;
+    height: 5vh;
+    border-radius: 3px;
+    margin-top: 1rem;
+    aspect-ratio: 16/9;
+}
+
+.all-servers-container{
+    display: flex;
+    background-color: #454449;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 5vw;
+    gap: .25rem;
+    align-items: center;
+}

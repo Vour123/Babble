@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import { getAllServers } from '../../store/server'
+import './ServerList.css'
 
 
 export default function ServerListBar() {
@@ -11,17 +13,14 @@ export default function ServerListBar() {
         dispatch(getAllServers())
     },[dispatch])
 
-    console.log('this is all servers', allServers)
     return (
-        <div className='all-servers-container'>
+        <div className='server-box'>
             {allServers?.map((singleServer) => {
                 return (
-                    <>
-                    <div className='single-server-name '>{singleServer.name}</div>
-                    <img className='single-server-image' src={singleServer.image_url}></img>
-                    </>
-                )
-            })}
+                        <NavLink to={`/servers/${singleServer.id}`} className={'all-servers-container'}>
+                            <img className='single-server-image' src={singleServer.image_url}></img>
+                        </NavLink>
+                        )})}
         </div>
     )
 }
