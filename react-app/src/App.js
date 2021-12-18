@@ -5,7 +5,7 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
+import ServerListBar from './components/ServerListBar/ServerListBar';
 import User from './components/User';
 import { authenticate, login } from './store/session';
 
@@ -26,19 +26,19 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
       <Switch>
         <Route path='/' exact={true}>
+          <NavBar />
           <div>splash page</div>
         </Route>
-        <Route path='/login' exact={true}>
-          <LoginForm/>
+        {/* <Route path='/login' exact={true}>
+          <LoginForm />
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+        </Route> */}
+        <ProtectedRoute path='/servers' exact={true} >
+          <ServerListBar />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />

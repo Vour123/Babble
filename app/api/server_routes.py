@@ -12,8 +12,9 @@ server_routes = Blueprint('servers', __name__)
 @login_required
 def get_all_servers():
     servers = Server.query.all()
+    user_servers = [userServer for userServer in servers if current_user.id in userServer.user_id()]
     if servers:
-        return {'servers': [servers.to_dict() for servers in servers]}
+        return {'servers': [servers.to_dict() for servers in user_servers]}
 
 # delete server route
 @server_routes.route('/:server_id', methods=['DELETE'])
