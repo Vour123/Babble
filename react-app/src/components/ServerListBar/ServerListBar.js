@@ -16,7 +16,10 @@ export default function ServerListBar() {
         <div className='all-servers-container'>
             {allServers?.map((singleServer) => {
                 return (
-                    <img src={singleServer.image_url}></img>
+                    <>
+                    <div className='single-server-name '>{singleServer.name}</div>
+                    <img className='single-server-image' src={singleServer.image_url}></img>
+                    </>
                 )
             })}
         </div>

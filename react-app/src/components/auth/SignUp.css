@@ -1,0 +1,29 @@
+.signup-form-container{
+    display: flex;
+    height: 390%;
+    width: 100%;
+    flex-direction: column;
+    background-color: #7d7c84;
+    border-radius: 4px;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    transition: all .25s cubic-bezier(0.55, 0.06, 0.68, 0.19);
+}
+
+.signup-form-container-true{
+    transform: scale(1);
+}
+
+.signup-modal-input{
+    padding: .5rem;
+    border-radius: 3px;
+    margin: .65rem;
+    outline: none;
+    border: none;
+    width: 65%;
+}
+
+.signup-modal-input:focus{
+    outline:none;
+}
