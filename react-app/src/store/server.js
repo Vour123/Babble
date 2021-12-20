@@ -51,12 +51,12 @@ export default function reducer(state = {}, action) {
     let serverId;
     switch(action.type){
         case GET_ALL_SERVERS:
-            newState = {...state}
-            action.payload.forEach((singleServer) => newState[singleServer.id] = singleServer)
-            return newState;
+          newState = {...state}
+          action.payload.forEach((singleServer) => newState[singleServer.id] = singleServer)
+          return newState;
         case ADD_SERVER:
           newState = {...state}
-
+          newState[action.payload.id] = action.payload
           return newState;
         default:
             return state

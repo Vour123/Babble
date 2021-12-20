@@ -13,6 +13,8 @@ export default function AddServerForm({setShowModal}) {
     const history = useHistory()
     const dispatch = useDispatch();
 
+    
+
     const handleClick = async (e) => {
         e.preventDefault();
         const serverInformation = {
