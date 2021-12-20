@@ -28,7 +28,7 @@ export const getAllServers = () => async (dispatch) => {
 }
 
 export const addServer = (serverInformation) => async(dispatch) => {
-  const response = await fetch('/api/servers', {
+  const response = await fetch('/api/servers/', {
     method:'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(serverInformation)})

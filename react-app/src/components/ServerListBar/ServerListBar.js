@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { getAllServers } from '../../store/server'
-import  AddServer  from '../AddServer/AddServer'
+import  AddServerModal  from '../AddServer/AddServerModal'
 import './ServerList.css'
 
 
@@ -23,7 +23,7 @@ export default function ServerListBar() {
                                 <img className='single-server-image' src={singleServer.image_url}></img>
                             </NavLink>)   
                 }})}
-                <AddServer />
+                <AddServerModal />
         </div>
     )
 }

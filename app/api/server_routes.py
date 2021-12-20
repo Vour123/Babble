@@ -39,10 +39,11 @@ def new_server():
 
     if form.data['name']:
         server = Server(
-            name=form.data['name'],
+            name = form.data['name'],
             image_url = image,
-            priv=form.data['priv'],
-            owner_id = form.data['owner_id']
+            private = form.data['private'],
+            # owner_id = form.data['owner_id'],
+            owner_id = 1
         )
         db.session.add(server)
         db.session.commit()
