@@ -11,6 +11,7 @@ const SignUpForm = () => {
   const [bool, setBool] = useState(false);
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [imageUrl, setImageUrl] = useState('')
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
@@ -44,6 +45,10 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
+  const updateImageUrl = (e) => {
+    setImageUrl(e.target.value)
+  };
+
   if (user) {
     return <Redirect to='/' />;
   }
@@ -56,7 +61,6 @@ const SignUpForm = () => {
         ))}
       </div>
         <input
-          name='username'
           type='text'
           placeholder='Username'
           onChange={updateUsername}
@@ -64,7 +68,6 @@ const SignUpForm = () => {
           value={username}
         ></input>
         <input
-          name='email'
           type='text'
           placeholder='Email'
           onChange={updateEmail}
@@ -72,7 +75,13 @@ const SignUpForm = () => {
           value={email}
         ></input>
         <input
-          name='password'
+          type='url'
+          placeholder='Image URL'
+          onChange={updateImageUrl}
+          className='signup-modal-input imageurl-input'
+          value={imageUrl}
+        ></input>
+        <input
           type='password'
           placeholder='Password'
           onChange={updatePassword}
@@ -80,7 +89,6 @@ const SignUpForm = () => {
           value={password}
         ></input>
         <input
-          name='repeat_password'
           type='password'
           placeholder='Confirm Password'
           onChange={updateRepeatPassword}

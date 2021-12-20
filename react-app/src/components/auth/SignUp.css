@@ -1,9 +1,9 @@
 .signup-form-container{
     display: flex;
-    height: 390%;
+    height: 470%;
     width: 100%;
     flex-direction: column;
-    background-color: #7d7c84;
+    background-color: #494850;
     border-radius: 4px;
     justify-content: center;
     align-items: center;

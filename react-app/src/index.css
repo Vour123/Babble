@@ -24,6 +24,10 @@ dd {
   margin: 0;
 }
 
+body{
+    background-color: #494850;
+}
+
 ul[class],
 ol[class] {
   padding: 0;
@@ -89,7 +93,7 @@ img {
 
 .nav-btn:hover{
     border: none;
-    background-color: #2D93AD;
+    background-color: #B18FCF;
 }
 
 .nav-bar{
@@ -98,7 +102,7 @@ img {
     justify-content: space-between;
     min-height: 6rem;
     align-items: center;
-    background-color: #7D7C84;
+    background-color: #2C2C34;
 }
 
 .babble-logo{
@@ -119,4 +123,8 @@ img {
     justify-content: center;
     gap: .5rem;
 } 
+
+.protected-route-box{
+    display: flex;
+}
 

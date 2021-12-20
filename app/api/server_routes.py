@@ -1,7 +1,7 @@
 from flask import Blueprint, request 
 from flask_login.utils import login_required
 from flask_login import login_required, current_user
-from app.models import db, Server
+from app.models import db, Server, Member
 from app.forms import CreateServerForm, EditServerForm
 from .auth_routes import login, validation_errors_to_error_messages
 
@@ -28,9 +28,9 @@ def delete_specific_server(server_id):
         db.session.commit()
         return specific_server.to_dict()
 
-@server_routes.route('/:server_id', methods=['POST'])
+@server_routes.route('/', methods=['POST'])
 @login_required
-def new_server(server_id):
+def new_server():
     form = CreateServerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit() and not form.data['private']:
@@ -39,14 +39,22 @@ def new_server(server_id):
 
     if form.data['name']:
         server = Server(
-            name=form.data['name'],
+            name = form.data['name'],
             image_url = image,
-            owner_id = form.data['owner_id']
+            private = form.data['private'],
+            # owner_id = form.data['owner_id'],
+            owner_id = 1
         )
         db.session.add(server)
         db.session.commit()
 
-        # not sure where to add a member, but i think this is where it will happen
+        member = Member(
+                user_id = current_user.id,
+                server_id = server.to_dict()['id']
+        )
+        db.session.add(member)
+        db.session.commit()
+        # add member to server with websocket
         return server.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 

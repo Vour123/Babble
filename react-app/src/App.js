@@ -31,20 +31,9 @@ function App() {
           <NavBar />
           <div>splash page</div>
         </Route>
-        {/* <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route> */}
         <ProtectedRoute path='/servers' exact={true} >
-          <ServerListBar />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+        <ProtectedRoute path='/servers/:id' exact={true} >
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

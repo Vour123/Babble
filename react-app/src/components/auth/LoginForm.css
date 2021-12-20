@@ -1,9 +1,9 @@
 .login-form-container{
     display: flex;
-    height: 250%;
+    height: 270%;
     width: 100%;
     flex-direction: column;
-    background-color: #7d7c84;
+    background-color: #494850;
     border-radius: 4px;
     justify-content: center;
     align-items: center;
@@ -37,7 +37,7 @@
     text-decoration: none;
     color: white;
     height: 2rem;
-    width: 45%;
+    width: 35%;
     background-color: transparent;
     border-radius: 3px;
     padding: 0.25rem 1rem;
@@ -49,5 +49,5 @@
 
 .modal-button:hover{
     border: none;
-    background-color: #2D93AD;
+    background-color: #B18FCF;
 }
