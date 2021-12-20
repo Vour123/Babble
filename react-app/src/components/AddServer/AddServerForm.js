@@ -10,10 +10,8 @@ export default function AddServerForm({setShowModal}) {
     const [errors, setErrors] = useState([])
 
     const owner_id = useSelector(state => state.session.user.id);
-    const history = useHistory()
     const dispatch = useDispatch();
-
-    
+    const history = useHistory();
 
     const handleClick = async (e) => {
         e.preventDefault();
@@ -24,9 +22,10 @@ export default function AddServerForm({setShowModal}) {
             owner_id
         }
         const data = await dispatch(addServer(serverInformation))
-        if(data) {
-            setErrors(data)
+        if(data.errors) {
+            setErrors(data.errors)
         } else {
+            history.push(`/servers/${data.id}`)
             setShowModal(false)
         }
     }

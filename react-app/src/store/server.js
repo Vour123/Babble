@@ -35,11 +35,12 @@ export const addServer = (serverInformation) => async(dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(addServerAC(data))
-    return data.servers;
+    console.log('this is data', data)
+    return data ;
   } else if (response.status < 500) { 
     const data = await response.json();
   if (data.errors) {
-    return data.errors;
+    return data;
   }
   } else {
     return ['An error occurred. Please try again.']

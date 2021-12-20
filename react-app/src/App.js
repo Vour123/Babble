@@ -32,10 +32,8 @@ function App() {
           <div>splash page</div>
         </Route>
         <ProtectedRoute path='/servers' exact={true} >
-          <ServerListBar />
         </ProtectedRoute>
-        <ProtectedRoute path='/servers' exact={true} >
-          <h1>this is a specific server</h1>
+        <ProtectedRoute path='/servers/:id' exact={true} >
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
