@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import DropDownServer from './DropDownServer'
+import ServerInfoModal from './ServerInfoModal'
 import './ServerName.css'
 
 export default function ServerName() {
@@ -10,7 +10,9 @@ export default function ServerName() {
 
     return (
         <>
-        <div className='specific-server-name'>{specificServer[specificServerId]?.name} <DropDownServer/></div>
+        <div className='specific-server-name'>{specificServer[specificServerId]?.name}
+            <ServerInfoModal/>
+        </div>
         </>
     )
 }
