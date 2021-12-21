@@ -1,0 +1,20 @@
+.specific-server-name{
+    background-color: #2C2C34;
+    width: 14vw;
+    min-height: 6vh;
+    color: white;
+    font-size: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.drop-down-server{
+    cursor: pointer;
+}
+
+.server-actions-box-container{
+    background-color: white;
+    position: relative;
+    right: 300px;
+}

@@ -6,6 +6,7 @@ import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import ServerListBar from './components/ServerListBar/ServerListBar';
+import ConversationBar from './components/ConversationsBar/ConversationBar';
 import User from './components/User';
 import { authenticate, login } from './store/session';
 
@@ -33,7 +34,7 @@ function App() {
         </Route>
         <ProtectedRoute path='/servers' exact={true} >
         </ProtectedRoute>
-        <ProtectedRoute path='/servers/:id' exact={true} >
+        <ProtectedRoute path='/servers/:specificServerId' >
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
