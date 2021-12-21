@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ServerEditForm from '../ServerEditForm/ServerEditForm';
 import { CSSTransition } from 'react-transition-group';
 
 export default function DropDownServer() {
@@ -36,9 +37,9 @@ function DropDownMenu() {
                 <div className='menu'>
                     <DropDownItem 
                         leftIcon={<span className="material-icons-outlined">edit</span>}
-                        goToMenu='edit'>
+                        >
                         Edit Server</DropDownItem>
-                    <DropDownItem leftIcon={<span className="material-icons-outlined trash">delete</span>}> Delete Server</DropDownItem>
+                    <DropDownItem goToMenu='edit' leftIcon={<span className="material-icons-outlined trash">delete</span>}> Delete Server</DropDownItem>
                 </div>
             </CSSTransition>
 
@@ -47,7 +48,10 @@ function DropDownMenu() {
                 <div className='menu'>
                     <DropDownItem goToMenu='main' leftIcon={<span className="material-icons-outlined">arrow_back</span>}></DropDownItem>
                     <DropDownItem>
-                        {/* put the form here */}
+                        Confirm Deletion
+                    </DropDownItem>
+                    <DropDownItem>
+                        Cancel
                     </DropDownItem>
                 </div>
             </CSSTransition>
