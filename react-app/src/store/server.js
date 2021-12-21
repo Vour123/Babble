@@ -47,7 +47,7 @@ export const addServer = (serverInformation) => async(dispatch) => {
   }
 }
 
-export default function reducer(state = {}, action) {
+export default function reducer(state = {} , action) {
     let newState;
     let serverId;
     switch(action.type){
@@ -58,6 +58,7 @@ export default function reducer(state = {}, action) {
         case ADD_SERVER:
           newState = {...state}
           newState[action.payload.id] = action.payload
+          newState.currentServer = action.payload
           return newState;
         default:
             return state

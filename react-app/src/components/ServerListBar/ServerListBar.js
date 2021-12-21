@@ -17,10 +17,10 @@ export default function ServerListBar() {
     return (
         <div className='all-servers-container'>
             {allServers?.map((singleServer) => {
-                if(!singleServer.private){
+                if(!singleServer?.private){
                     return (
-                            <NavLink key={singleServer.id} to={`/servers/${singleServer.id}`} className={'single-server-box'}>
-                                <img className='single-server-image' src={singleServer.image_url}></img>
+                            <NavLink key={singleServer?.id} to={`/servers/${singleServer?.id}`} className={'single-server-box'}>
+                                <img className='single-server-image' src={singleServer?.image_url}></img>
                             </NavLink>)   
                 }})}
                 <AddServerModal />
