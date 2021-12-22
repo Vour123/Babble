@@ -101,7 +101,20 @@ export const editAServer = (serverInformation, serverId) => async (dispatch) => 
 } 
 
 export const getChannelsToServer = (serverId) => async (dispatch) => {
-  const response = await fetch('/api/servers/')
+  const response = await fetch(`/api/servers/${serverId}`)
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data)
+    dispatch(getChannelsToServer(data))
+    return data;
+  } else if (response.status < 500) { 
+    const data = await response.json();
+  if (data.errors) {
+    return data;
+  }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
 }
 export default function reducer(state = {} , action) {
     let newState;
