@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Modal } from '../context/Modal'
 import ServerEditForm from './ServerEditForm'
 
-export default function ServerEditModal() {
+export default function ServerEditModal({setOpen}) {
     const [showModal, setShowModal] = useState(false)
 
     return (
@@ -10,7 +10,7 @@ export default function ServerEditModal() {
             <div onClick={() => setShowModal(!showModal)}>Edit Server</div>
             {showModal && (
                 <Modal onClose={() => setShowModal(!showModal)}>
-                    <ServerEditForm setShowModal={setShowModal}/>
+                    <ServerEditForm setOpen={setOpen} setShowModal={setShowModal}/>
                 </Modal>
             )}
         </>

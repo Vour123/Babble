@@ -66,7 +66,7 @@ def update_server(server_id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit() and current_user.id == specific_server.owner_id:
         specific_server.name = form.data['name']
-        specific_server.image_url = form.data['url']
+        specific_server.image_url = form.data['image_url']
         db.session.commit()
         # web socket to edit server here
         return specific_server.to_dict()

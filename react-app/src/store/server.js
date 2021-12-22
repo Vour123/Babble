@@ -18,9 +18,9 @@ const deleteAServerAC = (serverId) => ({
   payload: serverId
 })
 
-const editAServerAC = (serverInformation, serverId) => ({
+const editAServerAC = (serverInformation) => ({
   type: EDIT_A_SERVER,
-  payload: serverId
+  payload: serverInformation
 })
  
 export const getAllServers = () => async (dispatch) => {
@@ -82,7 +82,7 @@ export const editAServer = (serverInformation, serverId) => async (dispatch) => 
     body: JSON.stringify(serverInformation)})
     if (response.ok) {
       const data = await response.json();
-      dispatch(editAServerAC(serverInformation))
+      dispatch(editAServerAC(data))
       return data;
     } else if (response.status < 500) { 
       const data = await response.json();
