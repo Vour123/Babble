@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Modal } from '../context/Modal'
-import { useHistory } from 'react-router-dom';
 import AddServerForm from './AddServerForm';
 import './AddServer.css'
 

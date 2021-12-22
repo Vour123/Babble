@@ -41,8 +41,7 @@ export const addServer = (serverInformation) => async(dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(addServerAC(data))
-    console.log('this is data', data)
-    return data ;
+    return data;
   } else if (response.status < 500) { 
     const data = await response.json();
   if (data.errors) {
@@ -54,21 +53,20 @@ export const addServer = (serverInformation) => async(dispatch) => {
 }
 
 export const deleteAServer = (serverId) => async(dispatch) => {
-  const response = await fetch ('/api/servers/:serverId', {
-    methods:"DELETE"})
-    if (response.ok) {
-      const data = await response.json();
-      dispatch(addServerAC(data))
-      console.log('this is data', data)
-      return data ;
-    } else if (response.status < 500) { 
-      const data = await response.json();
-    if (data.errors) {
-      return data;
-    }
-    } else {
-      return ['An error occurred. Please try again.']
-    }
+  const response = await fetch(`/api/servers/${serverId}`, {
+    method:"DELETE"})
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(deleteAServerAC(serverId))
+    return data;
+  } else if (response.status < 500) { 
+    const data = await response.json();
+  if (data.errors) {
+    return data;
+  }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
 }
 
 
@@ -84,6 +82,10 @@ export default function reducer(state = {} , action) {
           newState = {...state}
           newState[action.payload.id] = action.payload
           newState.currentServer = action.payload
+          return newState;
+        case DELETE_A_SERVER:
+          newState = {...state}
+          delete newState[action.payload] 
           return newState;
         default:
             return state
