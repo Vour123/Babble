@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './ServerEditForm.css'
 
 export default function ServerEditForm() {
     const [name, setName] = useState('')
