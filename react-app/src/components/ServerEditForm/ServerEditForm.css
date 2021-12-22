@@ -1,0 +1,43 @@
+.server-edit-container{
+    display: flex;
+    flex-direction: column;
+    height: 270%;
+    width: 100%;
+    background-color: #494850;
+    border: 4px;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-server-modal-input{
+    padding: 1rem;
+    height: 8%;
+    width: 45%;
+    border-radius: 3px;
+    margin: .65rem;
+    outline: none;
+    border: none;
+}
+
+.edit-server-button{
+    display: flex;
+    margin-top: .65rem;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    height: 2rem;
+    width: 35%;
+    background-color: transparent;
+    border-radius: 3px;
+    padding: 0.25rem 1rem;
+    border: 1.5px solid white;
+    font-size: 1rem;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+.edit-server-button:hover{
+    border: none;
+    background-color: #B18FCF;
+}

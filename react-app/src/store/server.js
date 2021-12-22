@@ -1,5 +1,7 @@
 const GET_ALL_SERVERS = 'server/GET_ALL_SERVERS';
-const ADD_SERVER = 'server/ADD_SERVER'
+const ADD_SERVER = 'server/ADD_SERVER';
+const DELETE_A_SERVER = 'server/DELETE_A_SERVER';
+const EDIT_A_SERVER = 'server/EDIT_A_SERVER';
 
 const getAllServersAC = (servers) => ({
     type: GET_ALL_SERVERS,
@@ -11,6 +13,16 @@ const addServerAC = (serverInformation) => ({
   payload: serverInformation
 })
 
+const deleteAServerAC = (serverId) => ({
+  type: DELETE_A_SERVER,
+  payload: serverId
+})
+
+const editAServerAC = (serverInformation) => ({
+  type: EDIT_A_SERVER,
+  payload: serverInformation
+})
+ 
 export const getAllServers = () => async (dispatch) => {
   const response = await fetch('/api/servers/');
   if (response.ok) {
@@ -35,8 +47,7 @@ export const addServer = (serverInformation) => async(dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(addServerAC(data))
-    console.log('this is data', data)
-    return data ;
+    return data;
   } else if (response.status < 500) { 
     const data = await response.json();
   if (data.errors) {
@@ -46,6 +57,42 @@ export const addServer = (serverInformation) => async(dispatch) => {
     return ['An error occurred. Please try again.']
   }
 }
+
+export const deleteAServer = (serverId) => async(dispatch) => {
+  const response = await fetch(`/api/servers/${serverId}`, {
+    method:"DELETE"})
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(deleteAServerAC(serverId))
+    return data;
+  } else if (response.status < 500) { 
+    const data = await response.json();
+  if (data.errors) {
+    return data;
+  }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
+export const editAServer = (serverInformation, serverId) => async (dispatch) => {
+  const response = await fetch(`/api/servers/${serverId}`, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(serverInformation)})
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(editAServerAC(data))
+      return data;
+    } else if (response.status < 500) { 
+      const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
+    } else {
+      return ['An error occurred. Please try again.']
+    }
+} 
 
 export default function reducer(state = {} , action) {
     let newState;
@@ -58,9 +105,16 @@ export default function reducer(state = {} , action) {
         case ADD_SERVER:
           newState = {...state}
           newState[action.payload.id] = action.payload
-          newState.currentServer = action.payload
           return newState;
-        default:
+        case DELETE_A_SERVER:
+          newState = {...state}
+          delete newState[action.payload] 
+          return newState;
+        case EDIT_A_SERVER:
+          newState = {...state}
+          newState[action.payload.id] = action.payload
+          return newState;
+          default:
             return state
     }
 } 
