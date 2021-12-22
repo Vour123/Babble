@@ -2,6 +2,7 @@ const GET_ALL_SERVERS = 'server/GET_ALL_SERVERS';
 const ADD_SERVER = 'server/ADD_SERVER';
 const DELETE_A_SERVER = 'server/DELETE_A_SERVER';
 const EDIT_A_SERVER = 'server/EDIT_A_SERVER';
+const GET_CHANNELS_TO_SERVER = 'channel/GET_CHANNELS_TO_SERVER'
 
 const getAllServersAC = (servers) => ({
     type: GET_ALL_SERVERS,
@@ -21,6 +22,11 @@ const deleteAServerAC = (serverId) => ({
 const editAServerAC = (serverInformation) => ({
   type: EDIT_A_SERVER,
   payload: serverInformation
+})
+
+const getChannelsToServerAC = (channels) => ({
+  type: GET_CHANNELS_TO_SERVER,
+  payload: channels
 })
  
 export const getAllServers = () => async (dispatch) => {
@@ -94,6 +100,9 @@ export const editAServer = (serverInformation, serverId) => async (dispatch) => 
     }
 } 
 
+export const getChannelsToServer = (serverId) => async (dispatch) => {
+  const response = await fetch('/api/servers/')
+}
 export default function reducer(state = {} , action) {
     let newState;
     let serverId;
