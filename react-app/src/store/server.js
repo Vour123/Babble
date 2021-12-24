@@ -2,6 +2,8 @@ const GET_ALL_SERVERS = 'server/GET_ALL_SERVERS';
 const ADD_SERVER = 'server/ADD_SERVER';
 const DELETE_A_SERVER = 'server/DELETE_A_SERVER';
 const EDIT_A_SERVER = 'server/EDIT_A_SERVER';
+const GET_CHANNELS_TO_SERVER = 'channel/GET_CHANNELS_TO_SERVER';
+
 
 const getAllServersAC = (servers) => ({
     type: GET_ALL_SERVERS,
@@ -21,6 +23,12 @@ const deleteAServerAC = (serverId) => ({
 const editAServerAC = (serverInformation) => ({
   type: EDIT_A_SERVER,
   payload: serverInformation
+})
+
+const getChannelsToServerAC = (channels, serverId) => ({
+  type: GET_CHANNELS_TO_SERVER,
+  payload: channels,
+  serverId: +serverId
 })
  
 export const getAllServers = () => async (dispatch) => {
@@ -92,7 +100,23 @@ export const editAServer = (serverInformation, serverId) => async (dispatch) => 
     } else {
       return ['An error occurred. Please try again.']
     }
-} 
+}
+
+export const getChannelsToServer = (serverId) => async (dispatch) => {
+  const response = await fetch(`/api/servers/${serverId}`)
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getChannelsToServerAC(data.channels, serverId))
+    return data;
+  } else if (response.status < 500) { 
+    const data = await response.json();
+  if (data.errors) {
+    return data;
+  }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
 
 export default function reducer(state = {} , action) {
     let newState;
@@ -114,7 +138,12 @@ export default function reducer(state = {} , action) {
           newState = {...state}
           newState[action.payload.id] = action.payload
           return newState;
-          default:
-            return state
+        case GET_CHANNELS_TO_SERVER:
+          newState = {...state}
+          action.payload.forEach((singleChannel) => newState[action.serverId].channels[singleChannel.id] = singleChannel) 
+          newState[action.serverId].channels = {...newState[action.serverId].channels}
+          return newState;
+        default:
+          return state
     }
 } 
