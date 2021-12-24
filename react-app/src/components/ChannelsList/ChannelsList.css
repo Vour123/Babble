@@ -1,0 +1,29 @@
+.channels-container{
+    background-color: #2C2C34;
+    display: flex;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.channel-title{
+    color: white;
+    margin-bottom: .5rem;
+    font-size: 1rem;
+    max-width: 100%;
+    text-decoration: none;
+    transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.channel-title:hover{
+    transform: scale(1.2);
+    color: #B18FCF;
+}
+
+.channels-header{
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
