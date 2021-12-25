@@ -2,8 +2,8 @@ const GET_ALL_SERVERS = 'server/GET_ALL_SERVERS';
 const ADD_SERVER = 'server/ADD_SERVER';
 const DELETE_A_SERVER = 'server/DELETE_A_SERVER';
 const EDIT_A_SERVER = 'server/EDIT_A_SERVER';
-const GET_CHANNELS_TO_SERVER = 'channel/GET_CHANNELS_TO_SERVER';
-
+const GET_CHANNELS_TO_SERVER = 'channel/GET_CHANNELS_TO_SERVER'
+const ADD_CHANNEL_TO_SERVER = 'channel/ADD_CHANNEL_TO_SERVER'
 
 const getAllServersAC = (servers) => ({
     type: GET_ALL_SERVERS,
@@ -30,6 +30,13 @@ const getChannelsToServerAC = (channels, serverId) => ({
   payload: channels,
   serverId: +serverId
 })
+
+const addChannelToServerAC = (channelInformation) => ({
+  type: ADD_CHANNEL_TO_SERVER,
+  payload: channelInformation
+})
+
+
  
 export const getAllServers = () => async (dispatch) => {
   const response = await fetch('/api/servers/');
@@ -100,7 +107,7 @@ export const editAServer = (serverInformation, serverId) => async (dispatch) => 
     } else {
       return ['An error occurred. Please try again.']
     }
-}
+} 
 
 export const getChannelsToServer = (serverId) => async (dispatch) => {
   const response = await fetch(`/api/servers/${serverId}`)
@@ -116,6 +123,27 @@ export const getChannelsToServer = (serverId) => async (dispatch) => {
   } else {
     return ['An error occurred. Please try again.']
   }
+}
+
+export const addChannelToServer = (channelInformation) => async (dispatch) => {
+  const { specificServerId } = channelInformation
+  console.log('this is inside of the tuhk', specificServerId)
+  const response = await fetch(`/api/servers/${specificServerId}`, {
+    method: "POST",
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(channelInformation)})
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(addChannelToServerAC(data))
+      return data;
+    } else if (response.status < 500) { 
+      const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
+    } else {
+      return ['An error occurred. Please try again.']
+    }
 }
 
 export default function reducer(state = {} , action) {
@@ -143,7 +171,11 @@ export default function reducer(state = {} , action) {
           action.payload.forEach((singleChannel) => newState[action.serverId].channels[singleChannel.id] = singleChannel) 
           newState[action.serverId].channels = {...newState[action.serverId].channels}
           return newState;
-        default:
-          return state
+        case ADD_CHANNEL_TO_SERVER:
+          newState = {...state}
+          console.log(action.payload)
+          return newState;
+          default:
+            return state
     }
 } 
