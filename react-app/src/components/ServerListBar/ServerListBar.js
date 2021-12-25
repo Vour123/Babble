@@ -10,10 +10,6 @@ export default function ServerListBar() {
     const allServers = useSelector(state => Object.values(state.server))
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getAllServers())
-    },[dispatch])
-
     return (
         <div className='all-servers-container'>
             {allServers?.map((singleServer) => {
