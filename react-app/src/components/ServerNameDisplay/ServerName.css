@@ -1,82 +1,84 @@
 .specific-server-name{
-    background-color: #2C2C34;
-    width: 14vw;
-    min-height: 6vh;
-    color: white;
-    font-size: 4vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #2C2C34;
+  width: 14vw;
+  min-height: 6vh;
+  color: white;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.287);
 }
 
 .drop-down-server{
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .nav-item{
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .drop-down{
-    position: fixed;
-    top: 2.7rem;
-    width: 250px;
-    transform: translateX(-45%);
-    background-color: #2C2C34;
-    border: 1px solid #474a4d;
-    border-radius: 8px;
-    padding: .4rem;
-    overflow: hidden;
+  position: absolute;
+  top: 2.7rem;
+  width: 250px;
+  transform: translateX(-45%);
+  background-color: #2C2C34;
+  border: 1px solid #474a4d;
+  border-radius: 8px;
+  padding: .4rem;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .menu-item{
-    height: 50px;
-    display: flex;
-    align-items: center;
-    border-radius: 8px;
-    padding: .5rem;
-    text-decoration: none;
-    color: whitesmoke;
-    font-size: 2.3vh;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: .5rem;
+  text-decoration: none;
+  color: whitesmoke;
+  font-size: 2.3vh;
 }    
 
 .menu-item:hover{
-    background-color: #525357;
+  background-color: #525357;
 }
 
 .icon-right{
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .trash{
-    fill: red;
+  fill: red;
 }
 
 .menu-primary-enter {
-    position: absolute;
-    transform: translateX(-110%);
-  }
-  .menu-primary-enter-active {
-    transform: translateX(0%);
-    transition: all 500ms ease;
-  }
-  .menu-primary-exit {
-    position: absolute;
-  }
-  .menu-primary-exit-active {
-    transform: translateX(-110%);
-    transition: all 500ms ease;
-  }
+  position: absolute;
+  transform: translateX(-110%);
+}
+.menu-primary-enter-active {
+  transform: translateX(0%);
+  transition: all 500ms ease;
+}
+.menu-primary-exit {
+  position: absolute;
+}
+.menu-primary-exit-active {
+  transform: translateX(-110%);
+  transition: all 500ms ease;
+}
 
-  .menu-secondary-enter {
-    transform: translateX(110%);
-  }
-  .menu-secondary-enter-active {
-    transform: translateX(0%);
-    transition: all 500ms ease;
-  }
+.menu-secondary-enter {
+  transform: translateX(110%);
+}
+.menu-secondary-enter-active {
+  transform: translateX(0%);
+  transition: all 500ms ease;
+}
 
-  .menu-secondary-exit-active {
-    transform: translateX(110%);
-    transition: all 500ms ease;
-  }
+.menu-secondary-exit-active {
+  transform: translateX(110%);
+  transition: all 500ms ease;
+}

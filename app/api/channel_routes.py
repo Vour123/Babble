@@ -38,7 +38,7 @@ def post_channel(server_id):
     if form.validate_on_submit() and (server.owner_id == current_user.id):
         channel = Channel(
             name = form.data['name'],
-            server_id = id
+            server_id = server_id
         )
         db.session.add(channel)
         db.session.commit()

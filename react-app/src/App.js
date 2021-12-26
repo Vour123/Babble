@@ -8,6 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import ServerListBar from './components/ServerListBar/ServerListBar';
 import ConversationBar from './components/ConversationsBar/ConversationBar';
 import User from './components/User';
+import { getAllServers } from './store/server';
 import { authenticate, login } from './store/session';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      await dispatch(getAllServers())
       setLoaded(true);
     })();
   }, [dispatch]);

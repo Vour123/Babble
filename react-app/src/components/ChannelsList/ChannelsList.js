@@ -1,5 +1,5 @@
 import React, { useEffect} from 'react'
-// import AddChannel from '../AddChannel/AddChannel'
+import AddChannel from '../AddChannel/AddChannel'
 import { getChannelsToServer } from '../../store/server'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, NavLink } from 'react-router-dom'
@@ -33,7 +33,7 @@ export default function ChannelsList() {
         <div className='channels-container'>
             <div className='channels-header'>Channels</div>
                 {channelsMapped}
-                {/* <AddChannel /> */}
+                <AddChannel />
         </div>
     )
 }
