@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import {useHistory, useParams} from 'react-router-dom'
 import { addChannelToServer } from '../../store/server';
+import { getChannelsToServer } from '../../store/server';
 
 export default function AddChannelForm({setShowModal}) {
     const [name, setName] = useState('')
@@ -23,6 +24,7 @@ export default function AddChannelForm({setShowModal}) {
         } else {
             setShowModal(false)
         }
+        await dispatch(getChannelsToServer(specificServerId))
     }
 
     return (

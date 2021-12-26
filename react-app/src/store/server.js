@@ -173,7 +173,7 @@ export default function reducer(state = {} , action) {
           return newState;
         case ADD_CHANNEL_TO_SERVER:
           newState = {...state}
-          console.log(action.payload)
+          newState[action.payload.server_id].channels[action.payload.id] = action.payload
           return newState;
           default:
             return state
