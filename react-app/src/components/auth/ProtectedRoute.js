@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import ServerListBar from '../ServerListBar/ServerListBar';
 import ConversationBar from '../ConversationsBar/ConversationBar';
+import ChannelNameBar from '../ChannelNameBar/ChanneNameBar';
 
 const ProtectedRoute = props => {
   const user = useSelector(state => state.session.user)
@@ -12,7 +13,8 @@ const ProtectedRoute = props => {
       <Route {...props}>
         <ServerListBar />
         <ConversationBar />
-        {(user)? props.children  : <Redirect to='/' />}
+        <ChannelNameBar />
+        {(user)? props.children : <Redirect to='/' />}
       </Route>
     </div>
   )
