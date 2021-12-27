@@ -24,7 +24,7 @@ export default function AddChannelForm({setShowModal}) {
         } else {
             setShowModal(false)
         }
-        await dispatch(getChannelsToServer(specificServerId))
+        // await dispatch(getChannelsToServer(specificServerId))
     }
 
     return (

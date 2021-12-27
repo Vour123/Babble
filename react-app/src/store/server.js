@@ -2,8 +2,9 @@ const GET_ALL_SERVERS = 'server/GET_ALL_SERVERS';
 const ADD_SERVER = 'server/ADD_SERVER';
 const DELETE_A_SERVER = 'server/DELETE_A_SERVER';
 const EDIT_A_SERVER = 'server/EDIT_A_SERVER';
-const GET_CHANNELS_TO_SERVER = 'channel/GET_CHANNELS_TO_SERVER'
-const ADD_CHANNEL_TO_SERVER = 'channel/ADD_CHANNEL_TO_SERVER'
+const GET_CHANNELS_TO_SERVER = 'channel/GET_CHANNELS_TO_SERVER';
+const ADD_CHANNEL_TO_SERVER = 'channel/ADD_CHANNEL_TO_SERVER';
+const DELETE_CHANNEL_TO_SERVER = 'channel/DELETE_CHANNEL_TO_SERVER';
 
 const getAllServersAC = (servers) => ({
     type: GET_ALL_SERVERS,
@@ -36,6 +37,11 @@ const addChannelToServerAC = (channelInformation) => ({
   payload: channelInformation
 })
 
+const deleteChannelToServerAC = (channelId, serverId) => ({
+  type: DELETE_CHANNEL_TO_SERVER,
+  channelId,
+  serverId
+})
 
  
 export const getAllServers = () => async (dispatch) => {
@@ -127,7 +133,6 @@ export const getChannelsToServer = (serverId) => async (dispatch) => {
 
 export const addChannelToServer = (channelInformation) => async (dispatch) => {
   const { specificServerId } = channelInformation
-  console.log('this is inside of the tuhk', specificServerId)
   const response = await fetch(`/api/servers/${specificServerId}`, {
     method: "POST",
     headers: {'Content-Type': 'application/json'},
@@ -144,6 +149,23 @@ export const addChannelToServer = (channelInformation) => async (dispatch) => {
     } else {
       return ['An error occurred. Please try again.']
     }
+}
+
+export const deleteChannelToServer = (serverId, channelId) => async(dispatch) => {
+  const response = await fetch(`/api/servers/${serverId}/${channelId}`, {
+    method:"DELETE"})
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(deleteChannelToServerAC(channelId, serverId))
+    return data;
+  } else if (response.status < 500) { 
+    const data = await response.json();
+  if (data.errors) {
+    return data;
+  }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
 }
 
 export default function reducer(state = {} , action) {
@@ -174,6 +196,12 @@ export default function reducer(state = {} , action) {
         case ADD_CHANNEL_TO_SERVER:
           newState = {...state}
           newState[action.payload.server_id].channels[action.payload.id] = action.payload
+          newState[action.payload.server_id].channels = {...newState[action.payload.server_id].channels}
+          return newState;
+        case DELETE_CHANNEL_TO_SERVER:
+          newState = {...state};
+          delete newState[action.serverId].channels[action.channelId]
+          newState[action.serverId].channels = {...newState[action.serverId].channels}
           return newState;
           default:
             return state

@@ -8,7 +8,6 @@ import './ServerList.css'
 
 export default function ServerListBar() {
     const allServers = useSelector(state => Object.values(state.server))
-    const dispatch = useDispatch()
 
     return (
         <div className='all-servers-container'>
