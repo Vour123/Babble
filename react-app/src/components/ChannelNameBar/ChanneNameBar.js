@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import './ChannelNameBar.css'
+import DropDownChannel from './DropDownChannel'
 
 export default function ChannelNameBar() {
     const { specificChannelId, specificServerId } = useParams();
@@ -13,7 +15,8 @@ export default function ChannelNameBar() {
 
     return (
         <div className='channel-name-container'>
-            <div className='specific-channel-name'>{channelsToSpecificServer[channelIdx]?.name}</div>
+            <div className='specific-channel-name'>#{channelsToSpecificServer[channelIdx]?.name}</div>
+            <DropDownChannel />
         </div>
     )
 }

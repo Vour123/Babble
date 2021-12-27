@@ -34,8 +34,8 @@ function App() {
           <NavBar />
           <div>splash page</div>
         </Route>
-        <ProtectedRoute path='/servers' exact={true} >
-        </ProtectedRoute>
+        {/* <ProtectedRoute path='/servers' exact={true} >
+        </ProtectedRoute> */}
         <ProtectedRoute path='/servers/:specificServerId' exact={true}>
         </ProtectedRoute>
         <ProtectedRoute path='/servers/:specificServerId/:specificChannelId'>
