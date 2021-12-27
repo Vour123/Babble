@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ServerEditModal from '../ServerEditForm/ServerEditModal';
+import ChannelEditModal from '../ChannelEditForm/ChannelEditModal';
 import { CSSTransition } from 'react-transition-group';
 import { deleteChannelToServer } from '../../store/server';
 import { useParams, useHistory } from 'react-router-dom'
@@ -47,7 +47,7 @@ function DropDownMenu({setOpen}) {
         <div className='drop-down'>
             <CSSTransition in={activeMenu === 'main'} unmountOnExit timeout={500} classNames='menu-primary'>
                 <div className='menu'>
-                    <DropDownItem leftIcon={<span className="material-icons-outlined">edit</span>}> <ServerEditModal setOpen={setOpen}/> </DropDownItem>
+                    <DropDownItem leftIcon={<span className="material-icons-outlined">edit</span>}> <ChannelEditModal setOpen={setOpen}/> </DropDownItem>
                     <DropDownItem goToMenu='edit' leftIcon={<span className="material-icons-outlined trash">delete</span>}>Delete Channel</DropDownItem>
                 </div>
             </CSSTransition>
