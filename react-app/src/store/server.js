@@ -5,6 +5,7 @@ const EDIT_A_SERVER = 'server/EDIT_A_SERVER';
 const GET_CHANNELS_TO_SERVER = 'channel/GET_CHANNELS_TO_SERVER';
 const ADD_CHANNEL_TO_SERVER = 'channel/ADD_CHANNEL_TO_SERVER';
 const DELETE_CHANNEL_TO_SERVER = 'channel/DELETE_CHANNEL_TO_SERVER';
+const UPDATE_CHANNEL_TO_SERVER = 'channel/UPDATE_CHANNEL_TO_SERVER';
 
 const getAllServersAC = (servers) => ({
     type: GET_ALL_SERVERS,
@@ -41,6 +42,13 @@ const deleteChannelToServerAC = (channelId, serverId) => ({
   type: DELETE_CHANNEL_TO_SERVER,
   channelId,
   serverId
+})
+
+const updateChannelToServerAC = (channelInformation, serverId, channelId) => ({
+  type: UPDATE_CHANNEL_TO_SERVER,
+  payload: channelInformation,
+  serverId,
+  channelId
 })
 
  
@@ -168,6 +176,25 @@ export const deleteChannelToServer = (serverId, channelId) => async(dispatch) =>
   }
 }
 
+export const updateChannelToServer = (channelInformation, serverId, channelId) => async (dispatch) => {
+  const response = await fetch(`/api/servers/${serverId}/${channelId}`, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(channelInformation)})
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(updateChannelToServerAC(data))
+      return data;
+    } else if (response.status < 500) { 
+      const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
+    } else {
+      return ['An error occurred. Please try again.']
+    }
+} 
+
 export default function reducer(state = {} , action) {
     let newState;
     let serverId;
@@ -202,6 +229,8 @@ export default function reducer(state = {} , action) {
           newState = {...state};
           delete newState[action.serverId].channels[action.channelId]
           newState[action.serverId].channels = {...newState[action.serverId].channels}
+          return newState;
+        case UPDATE_CHANNEL_TO_SERVER:
           return newState;
           default:
             return state
