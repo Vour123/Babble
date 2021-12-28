@@ -31,7 +31,7 @@ export default function AddServerForm({setShowModal}) {
     }
 
     return (
-        <form className='add-server-form' onSubmit={handleClick}>
+        <form className='add-server-container' onSubmit={handleClick}>
             <input
                 type='text'
                 placeholder='Server Name'
