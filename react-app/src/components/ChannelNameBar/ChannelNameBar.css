@@ -9,10 +9,13 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.287);
     border-left: 1px solid rgba(255, 255, 255, 0.287);
     align-items: center;
+    justify-content: space-between;
 }
 
 .specific-channel-name{
     margin-left: 1rem;
+    display: flex;
+    justify-content: center;
 }
 
 .channel-drop-down{

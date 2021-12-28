@@ -2,7 +2,7 @@
     margin-top: .5rem;
     cursor: pointer;
     transition: all .15s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-    fill: ghostwhite;
+    fill: rgba(248, 248, 255, 0.5);
 }
 
 .plus-server-button:hover{

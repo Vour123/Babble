@@ -31,9 +31,8 @@ export default function ChannelsList() {
 
     return (
         <div className='channels-container'>
-            <div className='channels-header'>Channels</div>
-                {channelsMapped}
-                <AddChannel />
+            <div className='channels-header'>Channels <AddChannel /></div>
+                {channelsMapped?.length ? channelsMapped : <div className='default-channel-msg'> Press the plus button to create a new channel!</div>}
         </div>
     )
 }
