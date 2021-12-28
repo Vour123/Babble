@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import  LogoutButton  from '../auth/LogoutButton'
 import './ChannelNameBar.css'
 import DropDownChannel from './DropDownChannel'
 
@@ -14,9 +15,9 @@ export default function ChannelNameBar() {
     
 
     return (
-        <div className='channel-name-container'>
-            <div className='specific-channel-name'>#{channelsToSpecificServer[channelIdx]?.name}</div>
-            <DropDownChannel />
-        </div>
+            <div className='channel-name-container'>
+                <div className='specific-channel-name'>#{channelsToSpecificServer[channelIdx]?.name} <DropDownChannel /> </div>
+                <LogoutButton />
+            </div>
     )
 }

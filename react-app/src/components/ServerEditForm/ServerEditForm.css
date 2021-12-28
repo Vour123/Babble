@@ -4,7 +4,7 @@
     height: 270%;
     width: 100%;
     background-color: #494850;
-    border: 4px;
+    border-radius: 4px;
     justify-content: center;
     align-items: center;
 }

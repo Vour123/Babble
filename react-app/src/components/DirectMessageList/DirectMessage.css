@@ -24,7 +24,7 @@
     transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
-.single-server-box{
+.single-direct-message-box{
     display: flex;
     align-items: center;
     gap: .5rem;
@@ -32,7 +32,7 @@
     transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
-.single-server-box:hover{
+.single-direct-message-box:hover{
     transform: scale(1.03);
     background-color: #49485070;
 }

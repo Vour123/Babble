@@ -1,5 +1,5 @@
 .add-channel-svg{
-    transform: scale(.90);
+    transform: scale(.75);
     transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 

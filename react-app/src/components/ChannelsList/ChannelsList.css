@@ -4,8 +4,10 @@
     color: white;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding-left: 1rem;
     margin-bottom: 1rem;
+    margin-right: 1rem;
 }
 
 .channel-title{
@@ -25,5 +27,13 @@
 .channels-header{
     margin-top: 1.5rem;
     margin-bottom: 1rem;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    width: 100%;
+}
+
+.default-channel-msg{
+    text-align: center;
 }
