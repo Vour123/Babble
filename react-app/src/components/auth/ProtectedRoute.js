@@ -7,6 +7,7 @@ import ChannelNameBar from '../ChannelNameBar/ChanneNameBar';
 
 const ProtectedRoute = props => {
   const user = useSelector(state => state.session.user)
+  // const channels = useSelector(state => Object.values(state.server[serverInt]?.channels))
 
   return (
     <div className='protected-route-box'>
