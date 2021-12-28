@@ -10,7 +10,7 @@ export default function DropDownChannel() {
     return (
         <div>
             <li className='nav-item'>
-                <span onClick={() => setOpen(!open)} className="material-icons-outlined">arrow_drop_down</span>
+                <span onClick={() => setOpen(!open)} className="material-icons-outlined channel-drop-down">arrow_drop_down</span>
             </li>
             <div className='actual-box'>
                 {open && <DropDownMenu setOpen={setOpen}/>}

@@ -2,5 +2,44 @@
     color: white;
     font-size: 1.3rem;
     display: flex;
-    justify-content: center;
+    padding-left: 1rem;
+}
+
+.direct-message-image{
+   width: 3vw;
+   min-height: 2vh;
+   border-radius: 10px;
+}
+
+.direct-messages-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.direct-message-name{
+    color: white;
+    text-decoration: none;
+    font-size: 1.3rem;
+    transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.single-server-box{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    text-decoration: none;
+    transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.single-server-box:hover{
+    transform: scale(1.03);
+    background-color: #49485070;
+}
+
+.private-servers{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
 }
