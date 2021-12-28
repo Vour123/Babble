@@ -1,0 +1,6 @@
+.message-box-container{
+    background-color: #494850;
+    display: flex;
+    justify-content: center;
+    min-height: 94vh;
+}

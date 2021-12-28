@@ -5,11 +5,15 @@
     height: 6vh;
     display: flex;
     color: white;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.287);
     border-left: 1px solid rgba(255, 255, 255, 0.287);
     align-items: center;
     justify-content: space-between;
+}
+
+.channel-name-container-container{
+    width: 100%;
 }
 
 .specific-channel-name{
