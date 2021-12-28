@@ -14,3 +14,7 @@
 .specific-channel-name{
     margin-left: 1rem;
 }
+
+.channel-drop-down{
+    cursor: pointer;
+}
