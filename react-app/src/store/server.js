@@ -181,7 +181,6 @@ export const updateChannelToServer = (channelInformation, serverId, channelId) =
     method: "PUT",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(channelInformation)})
-    console.log('this is res', channelInformation)
     if (response.ok) {
       const data = await response.json();
       dispatch(updateChannelToServerAC(channelInformation, serverId, channelId))
@@ -233,8 +232,8 @@ export default function reducer(state = {} , action) {
           return newState;
         case UPDATE_CHANNEL_TO_SERVER:
           newState = {...state}
-          console.log(action.payload, 'this is payload')
           newState[action.serverId].channels[action.channelId] = action.payload
+          newState[action.serverId].channels = {...newState[action.serverId].channels}
           return newState;
           default:
             return state
