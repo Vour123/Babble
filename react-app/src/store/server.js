@@ -176,14 +176,14 @@ export const deleteChannelToServer = (serverId, channelId) => async(dispatch) =>
   }
 }
 
-export const updateChannelToServer = (channelInformation, serverId, channelId) => async (dispatch) => {
+export const updateChannelToServer = (channelInformation, serverId, channelId) => async(dispatch) => {
   const response = await fetch(`/api/servers/${serverId}/${channelId}`, {
     method: "PUT",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(channelInformation)})
     if (response.ok) {
       const data = await response.json();
-      dispatch(updateChannelToServerAC(data))
+      dispatch(updateChannelToServerAC(channelInformation, serverId, channelId))
       return data;
     } else if (response.status < 500) { 
       const data = await response.json();
@@ -231,6 +231,9 @@ export default function reducer(state = {} , action) {
           newState[action.serverId].channels = {...newState[action.serverId].channels}
           return newState;
         case UPDATE_CHANNEL_TO_SERVER:
+          newState = {...state}
+          newState[action.serverId].channels[action.channelId] = action.payload
+          newState[action.serverId].channels = {...newState[action.serverId].channels}
           return newState;
           default:
             return state
