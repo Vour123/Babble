@@ -4,24 +4,23 @@ from flask_login import login_required, current_user
 from app.models import db, Channel, Server
 from app.forms import CreateChannelForm, EditChannelForm
 from .auth_routes import validation_errors_to_error_messages
+from app.socket import handle_delete_a_channel, handle_edit_a_channel, handle_add_a_channel
 
 channel_routes = Blueprint('channels', __name__)
 
-# this is the route to get all channels from a specific server
 @channel_routes.route('/<int:id>')
 @login_required
 def channels(id):
     channels = Channel.query.filter(Channel.server_id == id)
     return {'channels': [channel.to_dict() for channel in channels]}
     
-#this is the server to delete a specific channel in a server
 @channel_routes.route('/<int:server_id>/<int:channel_id>', methods=['DELETE'])
 @login_required
 def delete_channel(server_id, channel_id):
     server = Server.query.get(int(server_id))
     if server.owner_id == current_user.id:
         channel = Channel.query.get(int(channel_id))
-        # websocket delete
+        handle_delete_a_channel(channel.to_dict())
         db.session.delete(channel)
         db.session.commit()
         return {'status:' : 'success'}
@@ -42,7 +41,7 @@ def post_channel(server_id):
         )
         db.session.add(channel)
         db.session.commit()
-        # web socket goes here when implenmented. idk how to do this yet
+        handle_add_a_channel(channel.to_dict())
         return channel.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -57,7 +56,7 @@ def update_channel(server_id, channel_id):
         channel = Channel.query.get(int(channel_id))
         channel.name = form.data['name']
         db.session.commit()
-        # implement web socket for updating the channel name
+        handle_edit_a_channel(channel.to_dict())
         return channel.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
