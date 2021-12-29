@@ -42,8 +42,7 @@ def new_server():
             name = form.data['name'],
             image_url = image,
             private = form.data['private'],
-            # owner_id = form.data['owner_id'],
-            owner_id = 1
+            owner_id = current_user.id
         )
         db.session.add(server)
         db.session.commit()
