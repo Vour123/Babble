@@ -94,7 +94,7 @@ export const addServer = (serverInformation) => async(dispatch) => {
 }
 
 export const deleteAServer = (serverId) => async(dispatch) => {
-  const response = await fetch(`/api/servers/${serverId}`, {
+  const response = await fetch(`/api/servers/${serverId}/`, {
     method:"DELETE"})
   if (response.ok) {
     const data = await response.json();
@@ -111,7 +111,7 @@ export const deleteAServer = (serverId) => async(dispatch) => {
 }
 
 export const editAServer = (serverInformation, serverId) => async (dispatch) => {
-  const response = await fetch(`/api/servers/${serverId}`, {
+  const response = await fetch(`/api/servers/${serverId}/`, {
     method: "PUT",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(serverInformation)})
@@ -130,7 +130,7 @@ export const editAServer = (serverInformation, serverId) => async (dispatch) => 
 } 
 
 export const getChannelsToServer = (serverId) => async (dispatch) => {
-  const response = await fetch(`/api/servers/${serverId}`)
+  const response = await fetch(`/api/servers/${serverId}/`)
   if (response.ok) {
     const data = await response.json();
     dispatch(getChannelsToServerAC(data.channels, serverId))
@@ -147,7 +147,7 @@ export const getChannelsToServer = (serverId) => async (dispatch) => {
 
 export const addChannelToServer = (channelInformation) => async (dispatch) => {
   const { specificServerId } = channelInformation
-  const response = await fetch(`/api/servers/${specificServerId}`, {
+  const response = await fetch(`/api/servers/${specificServerId}/`, {
     method: "POST",
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(channelInformation)})
@@ -166,7 +166,7 @@ export const addChannelToServer = (channelInformation) => async (dispatch) => {
 }
 
 export const deleteChannelToServer = (serverId, channelId) => async(dispatch) => {
-  const response = await fetch(`/api/servers/${serverId}/${channelId}`, {
+  const response = await fetch(`/api/servers/${serverId}/${channelId}/`, {
     method:"DELETE"})
   if (response.ok) {
     const data = await response.json();
@@ -183,7 +183,7 @@ export const deleteChannelToServer = (serverId, channelId) => async(dispatch) =>
 }
 
 export const updateChannelToServer = (channelInformation, serverId, channelId) => async(dispatch) => {
-  const response = await fetch(`/api/servers/${serverId}/${channelId}`, {
+  const response = await fetch(`/api/servers/${serverId}/${channelId}/`, {
     method: "PUT",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(channelInformation)})
@@ -202,7 +202,7 @@ export const updateChannelToServer = (channelInformation, serverId, channelId) =
 } 
 
 export const addMemberToServer = (serverId) => async(dispatch) => {
-  const response = await fetch(`/api/servers/${serverId}/members`, {
+  const response = await fetch(`/api/servers/${serverId}/members/`, {
     method: "POST",
     headers: {"Content-Type": "application/json"}})
     if (response.ok) {

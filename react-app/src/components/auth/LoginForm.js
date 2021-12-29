@@ -24,6 +24,7 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+    await dispatch({type: 'logout'})
     const data1 = await dispatch(getAllServers())
     if (data) {
       setErrors(data);

@@ -15,7 +15,9 @@ function LoginModal(){
     const demoLogin = async() => {
         await dispatch(login('demo@aa.io', 'password'));
         await dispatch(getAllServers())
-        history.push(`/servers/${userServers[0].id}`)
+        if(userServers[0]) {
+            history.push(`/servers/${userServers[0].id}`)
+        }
     }
 
     return (
