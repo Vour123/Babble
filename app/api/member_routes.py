@@ -29,7 +29,6 @@ def delete_existing_member_from_server(server_id):
     existing_user = User.query.get(int(current_user.id))
     existing_server = User.query.get(int(server_id))
     if existing_user in existing_server.members:
-        # find the user in the members list.
         member = Member.query.filter(current_user.id == Member.user_id)
         member.filter(existing_server == Member.server_id)[0]
         db.session.delete(member)
@@ -52,5 +51,3 @@ def edit_members_on_existing_server(server_idP):
         db.session.commit()
         return server.to_dict()
     return {"status": "unsuccessful"}
-
-    # no need to get all members cause to_dict in servers.

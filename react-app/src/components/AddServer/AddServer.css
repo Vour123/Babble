@@ -53,3 +53,9 @@
     border: none;
     background-color: #B18FCF;
 }
+
+.errors{
+    color: rgb(202, 0, 0);
+    font-weight: 500;
+    font-size: 0.75rem;
+}

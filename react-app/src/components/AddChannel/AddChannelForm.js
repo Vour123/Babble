@@ -3,32 +3,51 @@ import { useSelector, useDispatch } from "react-redux";
 import {useHistory, useParams} from 'react-router-dom'
 import { addChannelToServer } from '../../store/server';
 import { getChannelsToServer } from '../../store/server';
+import './AddChannel.css'
 
 export default function AddChannelForm({setShowModal}) {
     const [name, setName] = useState('')
     const [errors, setErrors] = useState([])
 
     const { specificServerId } = useParams();
-    const owner_id = useSelector(state => state.session.user.id);
     const dispatch = useDispatch();
+
+    const validator = () => {
+        let error = [];
+        if(name.length > 15) {
+            error.push('. : Please enter a name shorter than 10 characters')
+        } else if (name.length < 3) {
+            error.push('. : Please enter a name longer than 3 characters')
+        }
+        return error;
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const channelInformation = {
-            name,
-            specificServerId: +specificServerId
-        }
-        const data = await dispatch(addChannelToServer(channelInformation))
-        if(data.errors) {
-            setErrors(data.errors)
+        const errorsArr = validator();
+        if(errorsArr.length) {
+            setErrors(errorsArr)
         } else {
-            setShowModal(false)
+            const channelInformation = {
+                name,
+                specificServerId: +specificServerId
+            }
+            const data = await dispatch(addChannelToServer(channelInformation))
+            if(data.errors) {
+                setErrors(data.errors)
+            } else {
+                setShowModal(false)
+            }
         }
-        // await dispatch(getChannelsToServer(specificServerId))
     }
 
     return (
         <form className='add-channel-form' onSubmit={handleSubmit}>
+            <div className="errors">
+                        {errors.map((error, ind) => (
+                        <div key={ind}>{error.split(':')[1]}</div>
+                    ))}
+            </div>
             <input
                 type='text'
                 placeholder='Channel Name'
