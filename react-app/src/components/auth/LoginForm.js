@@ -13,15 +13,12 @@ const LoginForm = () => {
 
   const user = useSelector(state => state.session.user);
   const userServers = useSelector(state => state.server)
-  console.log('this is userServers', userServers);
 
   const dispatch = useDispatch();
 
     useEffect(() => {
       setBool(true)
   }, [])
-
-  // const usersFirstServer = asd;
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -49,7 +46,7 @@ const LoginForm = () => {
       <form className={`login-form-container login-form-container-${bool}`} onSubmit={onLogin}>
           <div className='error-results-modal'>
             {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
+              <div key={ind} className='actual-error'>{error.split(':')[1]}</div>
             ))}
           </div>
             <input

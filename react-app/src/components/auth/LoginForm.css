@@ -51,3 +51,8 @@
     border: none;
     background-color: #B18FCF;
 }
+
+.actual-error{
+    color: rgb(202, 0, 0);
+    font-weight: 500;
+}

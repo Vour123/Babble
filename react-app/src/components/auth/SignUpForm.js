@@ -23,6 +23,7 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
+      console.log(data,'this is data');
       if (data) {
         setErrors(data)
       }
@@ -52,12 +53,12 @@ const SignUpForm = () => {
   if (user) {
     return <Redirect to='/' />;
   }
-
+  
   return (
     <form onSubmit={onSignUp} className={`signup-form-container signup-form-container-${bool}`}>
-      <div className='error-results-modal'>
+      <div className='errors'>
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div key={ind}>{error.split(':')[1]}</div>
         ))}
       </div>
         <input
