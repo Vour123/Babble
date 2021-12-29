@@ -4,11 +4,10 @@ from flask_login import login_required, current_user
 from app.models import db, Server, Member, server
 from app.forms import CreateServerForm, EditServerForm
 from .auth_routes import login, validation_errors_to_error_messages
-from app.socket import handle_delete_a_server, handle_edit_a_server
+from app.socket import handle_add_a_channel, handle_delete_a_server, handle_edit_a_server
 
 server_routes = Blueprint('servers', __name__)
 
-# i think we want to grab all the servers that belong to a user so we can display those
 @server_routes.route('/')
 @login_required
 def get_all_servers():
@@ -21,7 +20,6 @@ def get_all_servers():
 @login_required
 def delete_specific_server(server_id):
     specific_server = Server.query.get(server_id)
-    # now that we have the server, we must check if its the owner is deleting it.
     if current_user.id == specific_server.owner_id:
         handle_delete_a_server(specific_server.to_dict())
         db.session.delete(specific_server)
@@ -34,7 +32,6 @@ def new_server():
     form = CreateServerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit() and not form.data['private']:
-        # above checks if server is a dm or not
         image = form.data['image_url']
 
     if form.data['name']:
@@ -53,7 +50,8 @@ def new_server():
         )
         db.session.add(member)
         db.session.commit()
-        # add member to server with websocket
+
+        handle_add_a_channel(server.to_dict())
         return server.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -67,7 +65,6 @@ def update_server(server_id):
         specific_server.name = form.data['name']
         specific_server.image_url = form.data['image_url']
         db.session.commit()
-        # web socket to edit server here
         handle_edit_a_server(specific_server.to_dict())
         return specific_server.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
