@@ -16,7 +16,7 @@ def get_all_servers():
     return {'servers': [server.to_dict() for server in user_servers]}
 
 # delete server route
-@server_routes.route('/<int:server_id>', methods=['DELETE'])
+@server_routes.route('/<int:server_id>/', methods=['DELETE'])
 @login_required
 def delete_specific_server(server_id):
     specific_server = Server.query.get(server_id)
@@ -55,7 +55,7 @@ def new_server():
         return server.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@server_routes.route('/<int:server_id>', methods=['PUT'])
+@server_routes.route('/<int:server_id>/', methods=['PUT'])
 @login_required
 def update_server(server_id):
     specific_server = Server.query.get(server_id)

@@ -10,13 +10,13 @@ from .auth_routes import login, validation_errors_to_error_messages
 
 message_routes = Blueprint('messages', __name__)
 
-@message_routes.route('/<int:server_id>/<int:channel_id>')
+@message_routes.route('/<int:server_id>/<int:channel_id>/')
 @login_required
 def load_messages_to_a_specific_server(server_id, channel_id):
     messages = Message.query.filter(Message.channel_id == channel_id).all()
     return {'messages': [messages.to_dict() for message in messages]}
 
-@message_routes.route('/<int:server_id>/<int:channel_id>', methods=['POST'])
+@message_routes.route('/<int:server_id>/<int:channel_id>/', methods=['POST'])
 @login_required
 def sending_a_new_message(server_idP, channel_idP):
     form = CreateMessageForm()
@@ -35,7 +35,7 @@ def sending_a_new_message(server_idP, channel_idP):
         return new_message.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@message_routes.route('/<int:server_id>/<int:channel_id>/<int:message_id>', methods=['PUT'])
+@message_routes.route('/<int:server_id>/<int:channel_id>/<int:message_id>/', methods=['PUT'])
 @login_required
 def edit_an_existing_message(server_id, channel_id, message_id):
     form = EditMessageForm()
@@ -50,7 +50,7 @@ def edit_an_existing_message(server_id, channel_id, message_id):
         return message.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@message_routes.route('/<int:server_id>/<int:channel_id>/<int:message_id>', methods=['DELETE'])
+@message_routes.route('/<int:server_id>/<int:channel_id>/<int:message_id>/', methods=['DELETE'])
 @login_required
 def delete_an_existing_message(server_id, channel_id, message_id):
     existing_message = Message.query.get(int(message_id))
