@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from app.models import db, Server, Member, server
 from app.forms import CreateServerForm, EditServerForm
 from .auth_routes import login, validation_errors_to_error_messages
+from app.socket import handle_delete_a_server, handle_edit_a_server
 
 server_routes = Blueprint('servers', __name__)
 
@@ -14,7 +15,6 @@ def get_all_servers():
     servers = Server.query.all()
     user_servers = [server for server in servers if current_user.id in server.user_id()]
     return {'servers': [server.to_dict() for server in user_servers]}
-    # return {'severs': [user_servers]}
 
 # delete server route
 @server_routes.route('/<int:server_id>', methods=['DELETE'])
@@ -23,7 +23,7 @@ def delete_specific_server(server_id):
     specific_server = Server.query.get(server_id)
     # now that we have the server, we must check if its the owner is deleting it.
     if current_user.id == specific_server.owner_id:
-        # web socket stuff?
+        handle_delete_a_server(specific_server.to_dict())
         db.session.delete(specific_server)
         db.session.commit()
         return specific_server.to_dict()
@@ -69,5 +69,6 @@ def update_server(server_id):
         specific_server.image_url = form.data['image_url']
         db.session.commit()
         # web socket to edit server here
+        handle_edit_a_server(specific_server.to_dict())
         return specific_server.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
