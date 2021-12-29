@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useHistory} from 'react-router-dom';
 import { login } from '../../store/session';
+import { getAllServers } from '../../store/server';
 import './LoginForm.css'
 
 const LoginForm = () => {
@@ -12,7 +13,7 @@ const LoginForm = () => {
   const history = useHistory();
 
   const user = useSelector(state => state.session.user);
-  const userServers = useSelector(state => state.server)
+  const userServers = useSelector(state => Object.values(state.server))
 
   const dispatch = useDispatch();
 
@@ -23,10 +24,13 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+    const data1 = await dispatch(getAllServers())
     if (data) {
       setErrors(data);
-    } else{
-      history.push('/servers')
+    } else {
+      if(userServers[0]) {
+        history.push(`/servers/${userServers[0].id}`)
+      }
     }
   };
 

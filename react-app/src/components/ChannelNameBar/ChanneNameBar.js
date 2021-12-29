@@ -18,7 +18,7 @@ export default function ChannelNameBar() {
     return (
         <div className='channel-name-container-container'>
             <div className='channel-name-container'>
-                <div className='specific-channel-name'>#{channelsToSpecificServer[channelIdx]?.name} <DropDownChannel /> </div>
+                {specificChannelId ? <div className='specific-channel-name'>#{channelsToSpecificServer[channelIdx]?.name} <DropDownChannel /> </div> : <div></div>}
                 <LogoutButton />
             </div>
             <MessagesBox />

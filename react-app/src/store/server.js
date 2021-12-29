@@ -6,6 +6,7 @@ const GET_CHANNELS_TO_SERVER = 'channel/GET_CHANNELS_TO_SERVER';
 const ADD_CHANNEL_TO_SERVER = 'channel/ADD_CHANNEL_TO_SERVER';
 const DELETE_CHANNEL_TO_SERVER = 'channel/DELETE_CHANNEL_TO_SERVER';
 const UPDATE_CHANNEL_TO_SERVER = 'channel/UPDATE_CHANNEL_TO_SERVER';
+const ADD_MEMBER_TO_SERVER = 'member/ADD_MEMBER_TO_SERVER';
 
 const getAllServersAC = (servers) => ({
     type: GET_ALL_SERVERS,
@@ -49,6 +50,11 @@ const updateChannelToServerAC = (channelInformation, serverId, channelId) => ({
   payload: channelInformation,
   serverId,
   channelId
+})
+
+const addMemberToServerAC = (server) => ({
+  type: ADD_MEMBER_TO_SERVER,
+  server
 })
 
  
@@ -195,6 +201,24 @@ export const updateChannelToServer = (channelInformation, serverId, channelId) =
     }
 } 
 
+export const addMemberToServer = (serverId) => async(dispatch) => {
+  const response = await fetch(`/api/servers/${serverId}/members`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"}})
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(addMemberToServerAC(serverId))
+      return data;
+    } else if (response.status < 500) { 
+      const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
+    } else {
+      return ['An error occurred. Please try again.']
+    }
+} 
+
 export default function reducer(state = {} , action) {
     let newState;
     let serverId;
@@ -234,6 +258,9 @@ export default function reducer(state = {} , action) {
           newState = {...state}
           newState[action.serverId].channels[action.channelId] = action.payload
           newState[action.serverId].channels = {...newState[action.serverId].channels}
+          return newState;
+        case 'logout':
+          newState = null
           return newState;
           default:
             return state

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ServerEditModal from '../ServerEditForm/ServerEditModal';
 import { CSSTransition } from 'react-transition-group';
 import { deleteAServer } from '../../store/server';
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 export default function DropDownServer() {
@@ -22,11 +22,13 @@ export default function DropDownServer() {
 
 function DropDownMenu({setOpen}) {
     const [activeMenu, setActiveMenu] = useState('main')
-    const dispatch = useDispatch()
-    const { specificServerId } = useParams()
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { specificServerId } = useParams();
     
     const handleDelete = (e) => {
         dispatch(deleteAServer(specificServerId))
+        history.push('/servers/1')
         setOpen(false)
     }
 

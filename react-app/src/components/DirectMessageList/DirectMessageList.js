@@ -16,7 +16,7 @@ export default function DirectMessageList() {
                 if(singleServer?.private) {
                     return(
                         <>
-                        <NavLink key={singleServer?.id} to={`/direct-messages/${singleServer?.id}`} className={'single-direct-message-box'}>
+                        <NavLink key={singleServer?.id} to={`/servers/direct-messages/${singleServer?.id}`} className={'single-direct-message-box'}>
                             <div></div>
                             <div></div>
                             <img className='direct-message-image' src={singleServer?.image_url}></img>
