@@ -39,13 +39,13 @@ def delete_existing_member_from_server(server_id):
 
 @member_routes.route('/<int:server_id>/members', methods=['POST'])
 @login_required
-def edit_members_on_existing_server(server_idP):
+def edit_members_on_existing_server(server_id):
     user = User.query.get(int(current_user.id))
-    server = Server.query.get(int(server_idP))
+    server = Server.query.get(int(server_id))
     if user and (user not in server.members):
         member = Member(
             user_id = current_user.id,
-            server_id = server_idP
+            server_id = server_id
         )
         db.session.add(member)
         db.session.commit()

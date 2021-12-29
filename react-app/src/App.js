@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import ServerListBar from './components/ServerListBar/ServerListBar';
 import ConversationBar from './components/ConversationsBar/ConversationBar';
+import SplashPage from './components/SplashPage/SplashPage';
 import User from './components/User';
 import { getAllServers } from './store/server';
 import { authenticate, login } from './store/session';
@@ -32,9 +33,9 @@ function App() {
       <Switch>
         <Route path='/' exact={true}>
           <NavBar />
-          <div>splash page</div>
+          <SplashPage />
         </Route>
-        <ProtectedRoute path='/servers' exact={true} >
+        <ProtectedRoute path='/servers/direct-messages/:specificServerId' exact={true} >
         </ProtectedRoute>
         <ProtectedRoute path='/servers/:specificServerId' exact={true}>
         </ProtectedRoute>

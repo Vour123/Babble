@@ -10,7 +10,7 @@ export default function ServerName() {
 
     return (
         <>
-        <div className='specific-server-name'>{specificServer[specificServerId]?.name} <DropDownServer/></div>
+        <div className='specific-server-name'>{specificServer[specificServerId]?.name} {specificServerId == 1 ?  null : <DropDownServer/>}</div>
         </>
     )
 }

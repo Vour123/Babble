@@ -22,7 +22,7 @@ export default function AddServerForm({setShowModal}) {
             error.push('. : Please enter a name longer than 3 characters')
         }
 
-        if(image_url != urlChecker) {
+        if((/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi).test(urlChecker)) {
             error.push('. : Please enter a URL')
         }
         return error;
