@@ -7,54 +7,61 @@ const ADD_CHANNEL_TO_SERVER = 'channel/ADD_CHANNEL_TO_SERVER';
 const DELETE_CHANNEL_TO_SERVER = 'channel/DELETE_CHANNEL_TO_SERVER';
 const UPDATE_CHANNEL_TO_SERVER = 'channel/UPDATE_CHANNEL_TO_SERVER';
 const ADD_MEMBER_TO_SERVER = 'member/ADD_MEMBER_TO_SERVER';
+const GET_ALL_MESSAGES = 'messages/GET_ALL_MESSAGES';
 
-const getAllServersAC = (servers) => ({
+export const getAllServersAC = (servers) => ({
     type: GET_ALL_SERVERS,
     payload: servers
 }) 
 
-const addServerAC = (serverInformation) => ({
+export const addServerAC = (serverInformation) => ({
   type: ADD_SERVER,
   payload: serverInformation
 })
 
-const deleteAServerAC = (serverId) => ({
+export const deleteAServerAC = (serverId) => ({
   type: DELETE_A_SERVER,
   payload: serverId
 })
 
-const editAServerAC = (serverInformation) => ({
+export const editAServerAC = (serverInformation) => ({
   type: EDIT_A_SERVER,
   payload: serverInformation
 })
 
-const getChannelsToServerAC = (channels, serverId) => ({
+export const getChannelsToServerAC = (channels, serverId) => ({
   type: GET_CHANNELS_TO_SERVER,
   payload: channels,
   serverId: +serverId
 })
 
-const addChannelToServerAC = (channelInformation) => ({
+export const addChannelToServerAC = (channelInformation) => ({
   type: ADD_CHANNEL_TO_SERVER,
   payload: channelInformation
 })
 
-const deleteChannelToServerAC = (channelId, serverId) => ({
+export const deleteChannelToServerAC = (channelId, serverId) => ({
   type: DELETE_CHANNEL_TO_SERVER,
   channelId,
   serverId
 })
 
-const updateChannelToServerAC = (channelInformation, serverId, channelId) => ({
+export const updateChannelToServerAC = (channelInformation, serverId, channelId) => ({
   type: UPDATE_CHANNEL_TO_SERVER,
   payload: channelInformation,
   serverId,
   channelId
 })
 
-const addMemberToServerAC = (server) => ({
+export const addMemberToServerAC = (server) => ({
   type: ADD_MEMBER_TO_SERVER,
   server
+})
+
+export const getMessagesOfServerAC = (serverId, channelId) => ({
+  type: GET_ALL_MESSAGES,
+  serverId,
+  channelId
 })
 
  
@@ -219,9 +226,25 @@ export const addMemberToServer = (serverId) => async(dispatch) => {
     }
 } 
 
+export const getAllMessagesOfServer = (serverId, channelId) => async(dispatch) => {
+  const response = await fetch(`/api/servers/${serverId}/${channelId}/`)
+  console.log('this is the res', response)
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getMessagesOfServerAC(serverId, channelId))
+    return data;
+  } else if (response.status < 500) { 
+    const data = await response.json();
+  if (data.errors) {
+    return data;
+  }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
 export default function reducer(state = {} , action) {
     let newState;
-    let serverId;
     switch(action.type){
         case GET_ALL_SERVERS:
           newState = {...state}
@@ -258,6 +281,10 @@ export default function reducer(state = {} , action) {
           newState = {...state}
           newState[action.serverId].channels[action.channelId] = action.payload
           newState[action.serverId].channels = {...newState[action.serverId].channels}
+          return newState;
+        case GET_ALL_MESSAGES:
+          newState = {...state}
+          console.log(action.payload, 'this is the action paylaod')
           return newState;
         case 'logout':
           newState = null

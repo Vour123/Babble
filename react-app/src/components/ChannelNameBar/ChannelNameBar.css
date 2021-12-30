@@ -13,6 +13,7 @@
 
 .channel-name-container-container{
     width: 100%;
+    overflow-y: hidden;
 }
 
 .specific-channel-name{
