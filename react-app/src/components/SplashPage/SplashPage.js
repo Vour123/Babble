@@ -12,9 +12,9 @@ export default function SplashPage() {
     useEffect(() => {
         socket = io();
 
-        socket.on('add_a_new_server', (server) => {
+        socket.on('add_a_new_server', (newServer) => {
             if(server.members.includes(sessionUser.user.id)){
-                dispatch(thunk.addServer(server))
+                dispatch(thunk.addServer(newServer))
             }})
             
         socket.on('delete_a_server', (server) => {
@@ -26,6 +26,18 @@ export default function SplashPage() {
             if(server.members.includes(sessionUser.user.id)) {
                 dispatch(thunk.editAServer(server, server.id))
             }})
+
+        socket.on('add_a_new_channel', (newChannel) => {
+            dispatch(thunk.addChannelToServer(newChannel))
+        })
+
+        socket.on('edit_a_channel', (channel) => {
+            dispatch(thunk.updateChannelToServer(channel, channel.server_id, channel.id))
+        })
+
+        socket.on('delete_a_channel', (channel) => {
+            dispatch(thunk.deleteChannelToServer(channel.id, channel.server_id))
+        })
 
     },[])
 
