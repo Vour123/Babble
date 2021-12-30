@@ -1,21 +1,33 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { io } from 'socket.io-client';
+import * as thunk from '../../store/server'
+let socket;
 
 export default function SplashPage() {
-    const history = useHistory();
-    const server = useSelector(state => state.server)
+    const dispatch = useDispatch();
+    const sessionUser = useSelector(state => state.user);
 
-    // let valueOfServer
-    // if(server) {
-    //     valueOfServer = Object.values(server);
-    // }
+    useEffect(() => {
+        socket = io();
 
-    // useEffect(() => {
-    //     if(valueOfServer[0]) {
-    //         history.push(`/servers/${valueOfServer[0].id}`)
-    //       }
-    // },[valueOfServer])
+        socket.on('add_a_new_server', (server) => {
+            if(server.members.includes(sessionUser.user.id)){
+                dispatch(thunk.addServer(server))
+            }})
+            
+        socket.on('delete_a_server', (server) => {
+            if(server.members.includes(sessionUser.user.id)) {
+                dispatch(thunk.deleteAServer(server.id))
+            }})
+        
+        socket.on('edit_a_server', (server) => {
+            if(server.members.includes(sessionUser.user.id)) {
+                dispatch(thunk.editAServer(server, server.id))
+            }})
+
+    },[])
 
     return (
         <div>
