@@ -12,7 +12,6 @@ export default function ChannelNameBar() {
     const serverInt = +specificServerId
     const channelInt = +specificChannelId
     const channelsToSpecificServerObj = useSelector(state => state.server)
-    console.log('this is the server', channelsToSpecificServerObj)
 
     let channelsToSpecificServer;
     if(channelsToSpecificServerObj) {
@@ -32,7 +31,6 @@ export default function ChannelNameBar() {
                 {specificChannelId ? <div className='specific-channel-name'>#{channelsToSpecificServer[channelIdx]?.name} <DropDownChannel /> </div> : <div></div>}
                 <LogoutButton />
             </div>
-            <DisplayMessages />
             <MessagesBox channelName={channelName}/>
         </div>
     )

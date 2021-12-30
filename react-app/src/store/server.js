@@ -58,8 +58,9 @@ export const addMemberToServerAC = (server) => ({
   server
 })
 
-export const getMessagesOfServerAC = (serverId, channelId) => ({
+export const getMessagesOfServerAC = (messages, serverId, channelId) => ({
   type: GET_ALL_MESSAGES,
+  payload: messages,
   serverId,
   channelId
 })
@@ -226,12 +227,11 @@ export const addMemberToServer = (serverId) => async(dispatch) => {
     }
 } 
 
-export const getAllMessagesOfServer = (serverId, channelId) => async(dispatch) => {
-  const response = await fetch(`/api/servers/${serverId}/${channelId}/`)
-  console.log('this is the res', response)
+export const getAllMessagesOfServer = (specificServerId, specificChannelId) => async(dispatch) => {
+  const response = await fetch(`/api/servers/${+specificServerId}/${+specificChannelId}/`)
   if (response.ok) {
     const data = await response.json();
-    dispatch(getMessagesOfServerAC(serverId, channelId))
+    dispatch(getMessagesOfServerAC(data, +specificServerId))
     return data;
   } else if (response.status < 500) { 
     const data = await response.json();
@@ -284,7 +284,7 @@ export default function reducer(state = {} , action) {
           return newState;
         case GET_ALL_MESSAGES:
           newState = {...state}
-          console.log(action.payload, 'this is the action paylaod')
+          action.payload.messages.forEach((singleMessage) => newState[action.serverId].channels[singleMessage.channel_id].messages[singleMessage.id] = singleMessage)
           return newState;
         case 'logout':
           newState = null

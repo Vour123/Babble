@@ -1,15 +1,12 @@
 .message-box-container{
     background-color: #494850;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    min-height: 94vh;
+    overflow-y: auto;
+    height: 100%;
 }
 
 .input-container{
-    display: static;
     justify-content: center;
-    margin: 1rem;
+    margin: .7rem;
     color: black;
 }
 
@@ -25,5 +22,21 @@
 }
 
 .new-message-input::placeholder{
+    color: white;
+}
+
+.display-messages-container{
+    height: 40rem;
+    /* width: 80vw;
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll; */
+}
+
+.message{
+    width: 95%;
+    margin-left: 1rem;
+    margin-top: .54rem;
     color: white;
 }

@@ -12,7 +12,9 @@
 }
 
 .channel-name-container-container{
+    display: flex;
     width: 100%;
+    flex-direction: column;
     overflow-y: hidden;
 }
 
