@@ -13,8 +13,6 @@ export default function ServerEditForm({setOpen}) {
     const owner_id = useSelector(state => state.session.user.id)
     const { specificServerId } = useParams();
 
-    const urlChecker = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
-
     const validator = () => {
         let error = [];
         if(name.length > 15) {
@@ -23,8 +21,8 @@ export default function ServerEditForm({setOpen}) {
             error.push('. : Please enter a name longer than 3 characters')
         }
 
-        if(image_url != urlChecker) {
-            error.push('. : Please enter a URL')
+        if(!/\.(jpe?g|png|gif|bmp)/gi.test(image_url)) {
+            error.push('. : URL must contain jpg, jpeg, png extension within it')
         }
         return error;
     }

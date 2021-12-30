@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "react-transition-group": "^4.4.2"
+    "react-transition-group": "^4.4.2",
+    "socket.io-client": "^4.4.0"
   }
 }

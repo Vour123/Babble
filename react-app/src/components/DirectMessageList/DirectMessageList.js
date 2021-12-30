@@ -4,7 +4,12 @@ import { NavLink } from 'react-router-dom'
 import './DirectMessage.css'
 
 export default function DirectMessageList() {
-    const allServers = useSelector(state => Object.values(state.server))
+    const allServersObj = useSelector(state => state.server)
+
+    let allServers;
+    if(allServersObj) {
+        allServers = Object.values(allServersObj);
+    }
 
     return (
         <>

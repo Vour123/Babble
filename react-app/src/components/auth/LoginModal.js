@@ -10,14 +10,12 @@ function LoginModal(){
     const dispatch = useDispatch()
     const [showModal, setShowModal] = useState(false)
     const history = useHistory();
-    const userServers = useSelector(state => Object.values(state.server));
+    // const userServers = useSelector(state => Object.values(state.server));
 
     const demoLogin = async() => {
+        await dispatch({type: 'logout'})
         await dispatch(login('demo@aa.io', 'password'));
-        await dispatch(getAllServers())
-        if(userServers[0]) {
-            history.push(`/servers/${userServers[0].id}`)
-        }
+        await dispatch(getAllServers()).then(history.push(`/servers/1`))
     }
 
     return (

@@ -13,7 +13,12 @@ const LoginForm = () => {
   const history = useHistory();
 
   const user = useSelector(state => state.session.user);
-  const userServers = useSelector(state => Object.values(state.server))
+  const userServersY = useSelector(state => state.server)
+
+  let userServers;
+  if(userServersY) {
+    userServers = Object.values(userServersY);
+  }
 
   const dispatch = useDispatch();
 
@@ -23,13 +28,13 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
     await dispatch({type: 'logout'})
+    const data = await dispatch(login(email, password));
     const data1 = await dispatch(getAllServers())
     if (data) {
       setErrors(data);
     } else {
-      if(userServers[0]) {
+      if(userServers) {
         history.push(`/servers/${userServers[0].id}`)
       }
     }

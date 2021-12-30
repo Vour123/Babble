@@ -13,7 +13,7 @@ def handle_edit_a_server(data):
     socketio.emit('edit_a_server', data, broadcast=True)
 
 def handle_add_a_channel(data):
-    socketio.emit('add_a_channel', data, broadcast=True)
+    socketio.emit('add_a_new_channel', data, broadcast=True)
 
 def handle_edit_a_channel(data):
     socketio.emit('edit_a_channel', data, broadcast=True)
