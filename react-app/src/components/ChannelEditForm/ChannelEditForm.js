@@ -16,8 +16,8 @@ export default function ChannelEditForm({setOpen}) {
 
     const validator = () => {
         let error = [];
-        if(name.length > 15) {
-            error.push('. : Please enter a name shorter than 10 characters')
+        if(name.length >= 25) {
+            error.push('. : Please enter a name shorter than 25 characters')
         } else if (name.length < 3) {
             error.push('. : Please enter a name longer than 3 characters')
         }

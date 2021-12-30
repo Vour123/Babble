@@ -5,3 +5,14 @@
     flex-direction: column;
     min-height: 94vh;
 }
+
+.input-container{
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.new-message-input{
+    width: 95%;
+    padding: .4rem;
+}

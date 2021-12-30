@@ -6,7 +6,6 @@ export default function MessagesBox() {
 
     return (
         <div className='message-box-container'>
-            this is the messaging box
             <div className='input-container'>
                 <input
                 type='text'

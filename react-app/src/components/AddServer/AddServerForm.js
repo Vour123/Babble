@@ -12,7 +12,6 @@ export default function AddServerForm({setShowModal}) {
     const owner_id = useSelector(state => state.session.user.id);
     const dispatch = useDispatch();
     const history = useHistory();
-    const urlChecker = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
 
     const validator = () => {
         let error = [];
@@ -22,7 +21,7 @@ export default function AddServerForm({setShowModal}) {
             error.push('. : Please enter a name longer than 3 characters')
         }
 
-        if((/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi).test(urlChecker)) {
+        if(!/\.(jpe?g|png|gif|bmp)/gi.test(image_url)) {
             error.push('. : Please enter a URL')
         }
         return error;

@@ -7,6 +7,7 @@ from app.models import db, Server, server, Message, message
 from app.forms import CreateMessageForm, EditMessageForm
 from app.models.channel import Channel
 from .auth_routes import login, validation_errors_to_error_messages
+from app.socket import handle_add_a_message, handle_edit_a_message, handle_delete_a_message
 
 message_routes = Blueprint('messages', __name__)
 
@@ -28,10 +29,10 @@ def sending_a_new_message(server_idP, channel_idP):
             owner_id = current_user.id
         )
         specific_server = Server.query.get(int(server_idP))
-        server_informaton = server.to_dict()
+        server_information = server.to_dict()
         db.session.add(new_message)
         db.session.commit()
-        # web socket add message 
+        handle_add_a_message(new_message.to_dict(), server_information["id"])
         return new_message.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -46,7 +47,7 @@ def edit_an_existing_message(server_id, channel_id, message_id):
         specific_server = Server.query.get(int(server_id))
         server_information = server.to_dict()
         db.session.commit()
-        # web socket to edit message
+        handle_edit_a_message(existing_message.to_dict(), server_information["id"])
         return message.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -57,7 +58,7 @@ def delete_an_existing_message(server_id, channel_id, message_id):
     if existing_message.owner_id == current_user.id:
         specific_server = Server.query.get(int(server_id))
         server_information = server.to_dict()
-        #web socket to delete the message
+        handle_delete_a_message(existing_message.to_dict(), server_information["id"])
         db.session.delete(existing_message)
         db.session.commit()
         return {'result': 'success'}
