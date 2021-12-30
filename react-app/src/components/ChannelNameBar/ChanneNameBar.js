@@ -16,8 +16,13 @@ export default function ChannelNameBar() {
     if(channelsToSpecificServerObj) {
         channelsToSpecificServer = Object.values(channelsToSpecificServerObj[serverInt]?.channels)
     }
-
     const channelIdx = channelsToSpecificServer?.findIndex(channel => channelInt === channel.id)
+
+    let channelName;
+    if(channelIdx) {
+        channelName=channelsToSpecificServer[channelIdx]?.name
+        console.log(channelName);
+    }
     
 
     return (
@@ -26,7 +31,7 @@ export default function ChannelNameBar() {
                 {specificChannelId ? <div className='specific-channel-name'>#{channelsToSpecificServer[channelIdx]?.name} <DropDownChannel /> </div> : <div></div>}
                 <LogoutButton />
             </div>
-            <MessagesBox />
+            <MessagesBox channelName={channelName}/>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './MessagesBox.css'
 
-export default function MessagesBox() {
+export default function MessagesBox({channelName}) {
     const [message, setMessage] = useState('');
 
     return (
@@ -9,12 +9,13 @@ export default function MessagesBox() {
             <div className='input-container'>
                 <input
                 type='text'
-                placeholder={`Message`}
+                placeholder={channelName ? `Message ${channelName}` : null}
                 value={message}
                 className='new-message-input message-input'
-                onChange={setMessage}
+                onChange={(e) => setMessage(e.target.value)}
                 />
             </div>
         </div>
     )
 }
+

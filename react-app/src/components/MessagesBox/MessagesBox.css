@@ -10,9 +10,20 @@
     display: flex;
     justify-content: center;
     margin: 1rem;
+    color: black;
 }
 
 .new-message-input{
     width: 95%;
     padding: .4rem;
+    border: none;
+    outline: none;
+    background-color: #676769;
+    color: white;
+    border-radius: 15px;
+    border: 1px solid #9a9a9c
+}
+
+.new-message-input::placeholder{
+    color: white;
 }

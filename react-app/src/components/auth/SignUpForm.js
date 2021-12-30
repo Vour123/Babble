@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory} from 'react-router-dom';
 import { signUp } from '../../store/session';
+import { getAllServers } from '../../store/server';
 import './SignUp.css'
 
 const SignUpForm = () => {
@@ -12,8 +13,15 @@ const SignUpForm = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [imageUrl, setImageUrl] = useState('')
+  const history = useHistory();
   const user = useSelector(state => state.session.user);
+  const userServerY = useSelector(state => state.server)
   const dispatch = useDispatch();
+
+  let userServer;
+  if(userServerY) {
+    userServer = Object.values(userServerY);
+  }
 
     useEffect(() => {
       setBool(true)
@@ -22,10 +30,19 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
+      await dispatch({type: 'logout'})
       const data = await dispatch(signUp(username, email, password));
+      await dispatch(getAllServers())
       if (data) {
         setErrors(data)
+      } else {
+        if(userServer) {
+          console.log('this is user server', userServer)
+          history.push(`/servers/${userServer[0].id}`)
+        }
       }
+    } else {
+      setErrors([' . : Passwords do not match'])
     }
   };
 
@@ -94,7 +111,6 @@ const SignUpForm = () => {
           onChange={updateRepeatPassword}
           className='signup-modal-input password-input'
           value={repeatPassword}
-          required={true}
         ></input>
       <button type='submit' className='modal-button'>Sign Up</button>
     </form>

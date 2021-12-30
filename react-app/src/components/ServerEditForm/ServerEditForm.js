@@ -22,7 +22,7 @@ export default function ServerEditForm({setOpen}) {
         }
 
         if(!/\.(jpe?g|png|gif|bmp)/gi.test(image_url)) {
-            error.push('. : Please enter a URL')
+            error.push('. : URL must contain jpg, jpeg, png extension within it')
         }
         return error;
     }
