@@ -8,8 +8,11 @@ import './ServerList.css'
 
 export default function ServerListBar() {
     const allServersY = useSelector(state => state.server)
-    const allServers = Object.values(allServersY);
+    let allServers;
 
+    if(allServersY) {
+        allServers = Object.values(allServersY);
+    } 
     if(!allServers) {
         return null;
     }

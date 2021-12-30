@@ -8,6 +8,10 @@ export default function ServerName() {
     const specificServer = useSelector(state => state.server);
     const { specificServerId } = useParams();
 
+    if(!specificServer) {
+        return null;
+    }
+
     return (
         <>
         <div className='specific-server-name'>{specificServer[specificServerId]?.name} {specificServerId == 1 ?  null : <DropDownServer/>}</div>

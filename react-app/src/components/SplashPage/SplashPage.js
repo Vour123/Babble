@@ -13,7 +13,8 @@ export default function SplashPage() {
         socket = io();
 
         socket.on('add_a_new_server', (newServer) => {
-            if(server.members.includes(sessionUser.user.id)){
+            console.log(newServer, 'this is newServer')
+            if(newServer.members.includes(sessionUser.user.id)){
                 dispatch(thunk.addServer(newServer))
             }})
             

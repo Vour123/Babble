@@ -9,13 +9,17 @@ export default function ChannelsList() {
     const { specificServerId } = useParams()
     const dispatch = useDispatch()
     const serverInt = +specificServerId
-    const channelsToServer = useSelector(state => state.server[serverInt]?.channels)
+    const server = useSelector(state => state.server);
+
+    let channelsToServer;
+    if(server) {
+        channelsToServer = server[serverInt]?.channels
+    }
 
     let valuesChannelsToServer
     if(channelsToServer) {
         valuesChannelsToServer = Object.values(channelsToServer)
     }
-
 
     useEffect(() => {
         dispatch(getChannelsToServer(specificServerId))
