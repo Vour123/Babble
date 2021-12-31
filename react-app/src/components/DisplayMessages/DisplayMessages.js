@@ -25,14 +25,16 @@ export default function DisplayMessages() {
 
     return (
         <>
+            {messagesToChannel?.length != 0 ? <div className='messages-displayed'>
                 {messagesToChannel?.map((message) => {
                     return (
-                        <div className='message'>
+                        <div key={message.id} className='message'>
                             {message?.id}
                             {message?.content}
                         </div>
                     )
                 })}
+            </div> : <div className='message'>No messages here</div>}
         </>
     )
 }

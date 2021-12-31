@@ -17,14 +17,13 @@ export default function ChannelNameBar() {
     if(channelsToSpecificServerObj) {
         channelsToSpecificServer = Object.values(channelsToSpecificServerObj[serverInt]?.channels)
     }
-    const channelIdx = channelsToSpecificServer?.findIndex(channel => channelInt === channel.id)
-
+    let channelIdx = channelsToSpecificServer?.findIndex(channel => channelInt === channel.id)
+    
     let channelName;
-    if(channelIdx) {
+    if(channelIdx || channelIdx === 0) {
         channelName = channelsToSpecificServer[channelIdx]?.name
     }
     
-
     return (
         <div className='channel-name-container-container'>
             <div className='channel-name-container'>
