@@ -7,7 +7,7 @@
 
 .welcome-message{
     color: white;
-    margin: 1.5rem;
+    margin: 1rem;
     font-size: 3.5rem;
     font-weight: 150;
     padding: 1rem;
@@ -20,7 +20,31 @@
 
 .splash-png{
     margin-top: 2rem;
-    width: 25rem;
+    width: 18rem;
     position: relative;
-    left: 35px;
+    left: 10px;
 }
+
+.repo-text{
+    font-size: .75vw;
+    color: white;
+    margin-top: 1.3rem;
+    font-weight: 150;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.github-repo-img-container{
+    margin-left: .3rem;
+    width: 1rem;
+    color: white;
+    transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    transform: scale(.7);
+}
+
+.github-repo-img-container:hover{
+    color: #B18FCF;
+    transform: scale(.9);
+}
+
