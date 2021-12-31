@@ -8,6 +8,7 @@ const DELETE_CHANNEL_TO_SERVER = 'channel/DELETE_CHANNEL_TO_SERVER';
 const UPDATE_CHANNEL_TO_SERVER = 'channel/UPDATE_CHANNEL_TO_SERVER';
 const ADD_MEMBER_TO_SERVER = 'member/ADD_MEMBER_TO_SERVER';
 const GET_ALL_MESSAGES = 'messages/GET_ALL_MESSAGES';
+const POST_A_MESSAGE = 'messages/POST_A_MESSAGE';
 
 export const getAllServersAC = (servers) => ({
     type: GET_ALL_SERVERS,
@@ -63,6 +64,12 @@ export const getMessagesOfServerAC = (messages, serverId, channelId) => ({
   payload: messages,
   serverId,
   channelId
+})
+
+export const postMessageToServerAC = (messages, serverId) => ({
+  type: POST_A_MESSAGE,
+  payload: messages,
+  serverId
 })
 
  
@@ -244,6 +251,26 @@ export const getAllMessagesOfServer = (specificServerId, specificChannelId) => a
   }
 }
 
+export const postMessageToServer = (messageInformation, serverId) => async(dispatch) => {
+  const { specificChannelId } = messageInformation;
+  const response = await fetch(`/api/servers/${+serverId}/${+specificChannelId}/`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(messageInformation)})
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(postMessageToServerAC(messageInformation, serverId))
+      return data;
+    } else if (response.status < 500) { 
+      const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
+    } else {
+      return ['An error occurred. Please try again.']
+    }
+}
+
 export default function reducer(state = {} , action) {
     let newState;
     switch(action.type){
@@ -270,11 +297,8 @@ export default function reducer(state = {} , action) {
           return newState;
         case ADD_CHANNEL_TO_SERVER:
           newState = {...state}
-          console.log('here', action.payload)
-          // if(newState[action.payload.channelInformation.serverId]) {
-            newState[action.payload.server_id].channels[action.payload.id] = action.payload
-            newState[action.payload.server_id].channels = {...newState[action.payload.server_id].channels}
-          // }
+          newState[action.payload.server_id].channels[action.payload.id] = action.payload
+          newState[action.payload.server_id].channels = {...newState[action.payload.server_id].channels}
           return newState;
         case DELETE_CHANNEL_TO_SERVER:
           newState = {...state};

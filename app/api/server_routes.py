@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from app.models import db, Server, Member, server
 from app.forms import CreateServerForm, EditServerForm
 from .auth_routes import login, validation_errors_to_error_messages
-from app.socket import handle_add_a_new_server, handle_delete_a_server, handle_edit_a_server
+from app.socket import handle_add_a_channel, handle_delete_a_server, handle_edit_a_server, handle_add_a_new_server
 
 server_routes = Blueprint('servers', __name__)
 
@@ -51,6 +51,7 @@ def new_server():
         db.session.add(member)
         db.session.commit()
 
+        # handle_add_a_channel(server.to_dict())
         handle_add_a_new_server(server.to_dict())
         return server.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

@@ -20,7 +20,6 @@ export default function MessagesBox({channelName}) {
                     className='new-message-input message-input'
                     onChange={(e) => setMessage(e.target.value)}
                     />
-                    <button>Send</button>
                 </div>
         </>
     )
