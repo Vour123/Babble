@@ -15,7 +15,7 @@ export default function ConversationBar() {
     useEffect(() => {
         socket = io();
 
-        socket.on('add_a_new_server', (newServer) => {
+        socket.on('add_a_server', (newServer) => {
             if(newServer.members.includes(sessionUser.user.id)){
                 dispatch(AC.addServerAC(newServer))
             }})
@@ -30,18 +30,15 @@ export default function ConversationBar() {
                 dispatch(AC.editAServerAC(server, server.id))
             }})
 
-        socket.on('add_a_new_channel', (newChannel) => {
-            console.log('i hit the socket');
+        socket.on('add_a_channel', (newChannel) => {
             dispatch(AC.addChannelToServerAC(newChannel))
         })
 
         socket.on('edit_a_channel', (channel) => {
-            console.log('i hit the socket1');
             dispatch(AC.updateChannelToServerAC(channel, channel.server_id, channel.id))
         })
 
         socket.on('delete_a_channel', (channel) => {
-            console.log('i hit the socket2');
             dispatch(AC.deleteChannelToServerAC(channel.id, channel.server_id))
         })
 
