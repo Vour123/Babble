@@ -27,11 +27,6 @@
 
 .display-messages-container{
     height: 40rem;
-    /* width: 80vw;
-    justify-content: flex-end;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll; */
 }
 
 .message{

@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from "react-redux";
-import {useHistory, useParams} from 'react-router-dom'
+import { useDispatch } from "react-redux";
+import { useParams} from 'react-router-dom'
 import { addChannelToServer } from '../../store/server';
-import { getChannelsToServer } from '../../store/server';
 import './AddChannel.css'
 
 export default function AddChannelForm({setShowModal}) {
@@ -54,8 +53,9 @@ export default function AddChannelForm({setShowModal}) {
                 value={name}
                 className='new-channel-modal-input channel-name-input'
                 onChange={(e) => setName(e.target.value)}
-            />   
+            >
             <button className='form-channel-button'>Create new channel</button>
+            </input>   
         </form>
     )
 }

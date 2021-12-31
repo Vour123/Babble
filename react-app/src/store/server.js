@@ -228,6 +228,7 @@ export const addMemberToServer = (serverId) => async(dispatch) => {
 } 
 
 export const getAllMessagesOfServer = (specificServerId, specificChannelId) => async(dispatch) => {
+  if (!specificChannelId) return null;
   const response = await fetch(`/api/servers/${+specificServerId}/${+specificChannelId}/`)
   if (response.ok) {
     const data = await response.json();
@@ -269,8 +270,11 @@ export default function reducer(state = {} , action) {
           return newState;
         case ADD_CHANNEL_TO_SERVER:
           newState = {...state}
-          newState[action.payload.server_id].channels[action.payload.id] = action.payload
-          newState[action.payload.server_id].channels = {...newState[action.payload.server_id].channels}
+          console.log('here', action.payload)
+          // if(newState[action.payload.channelInformation.serverId]) {
+            newState[action.payload.server_id].channels[action.payload.id] = action.payload
+            newState[action.payload.server_id].channels = {...newState[action.payload.server_id].channels}
+          // }
           return newState;
         case DELETE_CHANNEL_TO_SERVER:
           newState = {...state};

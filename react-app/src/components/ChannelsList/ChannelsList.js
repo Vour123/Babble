@@ -22,7 +22,9 @@ export default function ChannelsList() {
     }
 
     useEffect(() => {
-        dispatch(getChannelsToServer(specificServerId))
+        if(channelsToServer) {
+            dispatch(getChannelsToServer(specificServerId))
+        }
     }, [dispatch, specificServerId])
 
 

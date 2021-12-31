@@ -16,7 +16,6 @@ export default function ConversationBar() {
         socket = io();
 
         socket.on('add_a_new_server', (newServer) => {
-            console.log(newServer, 'this is newServer')
             if(newServer.members.includes(sessionUser.user.id)){
                 dispatch(AC.addServerAC(newServer))
             }})
@@ -32,6 +31,7 @@ export default function ConversationBar() {
             }})
 
         socket.on('add_a_new_channel', (newChannel) => {
+            console.log('i hit the socket');
             dispatch(AC.addChannelToServerAC(newChannel))
         })
 
