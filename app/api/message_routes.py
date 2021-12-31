@@ -18,17 +18,17 @@ def load_messages_to_a_specific_server(server_id, channel_id):
 
 @message_routes.route('/<int:server_id>/<int:channel_id>/', methods=['POST'])
 @login_required
-def sending_a_new_message(server_idP, channel_idP):
+def sending_a_new_message(server_id, channel_id):
     form = CreateMessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_message = Message(
             content = form.data['content'],
-            channel_id = channel_idP,
+            channel_id = channel_id,
             owner_id = current_user.id
         )
-        specific_server = Server.query.get(int(server_idP))
-        server_information = server.to_dict()
+        specific_server = Server.query.get(int(server_id))
+        server_information = specific_server.to_dict()
         db.session.add(new_message)
         db.session.commit()
         handle_add_a_message(new_message.to_dict(), server_information["id"])

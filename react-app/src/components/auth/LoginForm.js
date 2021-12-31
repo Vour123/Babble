@@ -35,7 +35,7 @@ const LoginForm = () => {
       setErrors(data);
     } else {
       if(userServers) {
-        history.push(`/servers/${userServers[0].id}`)
+          history.push(`/servers/1`)
       }
     }
   };

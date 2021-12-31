@@ -121,7 +121,7 @@ img {
 
 .title-container{
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     gap: .5rem;
 } 
