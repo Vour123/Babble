@@ -7,7 +7,8 @@ import './MessagesBox.css'
 
 export default function MessagesBox({channelName}) {
     const [message, setMessage] = useState('');
-    const sessionUserId = useSelector(state => state.user?.id)
+    const sessionUser= useSelector(state => state.session)
+    const userId = sessionUser?.user.id
     const { specificServerId, specificChannelId } = useParams() 
     const dispatch  = useDispatch();
 
@@ -15,8 +16,8 @@ export default function MessagesBox({channelName}) {
         e.preventDefault();
         const messageInformation = {
             content: message,
-            specificChannelId: +specificChannelId,
-            sessionUserId: +sessionUserId
+            channel_id: +specificChannelId,
+            owner_id: +userId
         }
         if(messageInformation) {
             await dispatch(postMessageToServer(messageInformation, +specificServerId)).then(setMessage(''));
@@ -30,17 +31,16 @@ export default function MessagesBox({channelName}) {
                     <DisplayMessages />
                 </div>
             </div>
-                <div className='input-container'>
+                <form className='input-container' onSubmit={handleSubmit}>
                     <input
                     type='text'
                     placeholder={channelName ? `Message ${channelName}` : null}
                     value={message}
                     className='new-message-input message-input'
                     onChange={(e) => setMessage(e.target.value)}
-                    onSubmit={handleSubmit}
                     />
-                    <button onClick={handleSubmit}>click</button>
-                </div>
+                    <button type='submit'>click</button>
+                </form>
         </>
     )
 }

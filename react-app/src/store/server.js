@@ -252,14 +252,14 @@ export const getAllMessagesOfServer = (specificServerId, specificChannelId) => a
 }
 
 export const postMessageToServer = (messageInformation, serverId) => async(dispatch) => {
-  const { specificChannelId } = messageInformation;
-  const response = await fetch(`/api/servers/${+serverId}/${+specificChannelId}/`, {
+  const { channel_id } = messageInformation;
+  const response = await fetch(`/api/servers/${+serverId}/${+channel_id}/`, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(messageInformation)})
     if (response.ok) {
       const data = await response.json();
-      dispatch(postMessageToServerAC(messageInformation, serverId))
+      dispatch(postMessageToServerAC(data, serverId))
       return data;
     } else if (response.status < 500) { 
       const data = await response.json();
@@ -313,6 +313,10 @@ export default function reducer(state = {} , action) {
         case GET_ALL_MESSAGES:
           newState = {...state}
           action.payload.messages.forEach((singleMessage) => newState[action.serverId].channels[singleMessage.channel_id].messages[singleMessage.id] = singleMessage)
+          return newState;
+        case POST_A_MESSAGE:
+          newState = {...state}
+          newState[action.serverId].channels[action.payload.channel_id].messages[action.payload.id] = action.payload
           return newState;
         case 'logout':
           newState = null
