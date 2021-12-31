@@ -36,10 +36,12 @@ export default function ConversationBar() {
         })
 
         socket.on('edit_a_channel', (channel) => {
+            console.log('i hit the socket1');
             dispatch(AC.updateChannelToServerAC(channel, channel.server_id, channel.id))
         })
 
         socket.on('delete_a_channel', (channel) => {
+            console.log('i hit the socket2');
             dispatch(AC.deleteChannelToServerAC(channel.id, channel.server_id))
         })
 
