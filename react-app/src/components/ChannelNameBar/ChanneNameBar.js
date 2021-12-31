@@ -5,6 +5,7 @@ import  LogoutButton  from '../auth/LogoutButton'
 import './ChannelNameBar.css'
 import DropDownChannel from './DropDownChannel'
 import MessagesBox from '../MessagesBox/MessagesBox'
+import DisplayMessages from '../DisplayMessages/DisplayMessages'
 
 export default function ChannelNameBar() {
     const { specificChannelId, specificServerId } = useParams();
@@ -20,8 +21,7 @@ export default function ChannelNameBar() {
 
     let channelName;
     if(channelIdx) {
-        channelName=channelsToSpecificServer[channelIdx]?.name
-        console.log(channelName);
+        channelName = channelsToSpecificServer[channelIdx]?.name
     }
     
 

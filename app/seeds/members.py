@@ -26,11 +26,17 @@ def seed_members():
         server_id = 5
     )
 
+    member_6 = Member(
+        user_id = 2,
+        server_id = 5
+    )
+
     db.session.add(member_1)
     db.session.add(member_2)
     db.session.add(member_3)
     db.session.add(member_4)
     db.session.add(member_5)
+    db.session.add(member_6)
     db.session.commit()
 
 def undo_members():

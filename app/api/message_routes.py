@@ -1,4 +1,3 @@
-from math import log
 from flask import Blueprint, request 
 from flask_login.utils import login_required
 from flask_login import login_required, current_user
@@ -15,7 +14,7 @@ message_routes = Blueprint('messages', __name__)
 @login_required
 def load_messages_to_a_specific_server(server_id, channel_id):
     messages = Message.query.filter(Message.channel_id == channel_id).all()
-    return {'messages': [messages.to_dict() for message in messages]}
+    return {'messages': [message.to_dict() for message in messages]}
 
 @message_routes.route('/<int:server_id>/<int:channel_id>/', methods=['POST'])
 @login_required
