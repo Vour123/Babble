@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { getAllServers } from '../../store/server'
 import  AddServerModal  from '../AddServer/AddServerModal'
 import './ServerList.css'
 

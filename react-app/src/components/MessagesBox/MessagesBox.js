@@ -1,16 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { postMessageToServer } from '../../store/server';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import DisplayMessages from '../DisplayMessages/DisplayMessages'
+import SendIcon from '@mui/icons-material/Send';
 import './MessagesBox.css'
 
 export default function MessagesBox({channelName}) {
     const [message, setMessage] = useState('');
+    const endOfChatRef = useRef(null)
     const sessionUser= useSelector(state => state.session)
     const userId = sessionUser?.user.id
     const { specificServerId, specificChannelId } = useParams() 
     const dispatch  = useDispatch();
+
+    const scrollToBottom = () => {
+        endOfChatRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,13 +32,14 @@ export default function MessagesBox({channelName}) {
         if(messageInformation) {
             await dispatch(postMessageToServer(messageInformation, +specificServerId)).then(setMessage(''));
         }
+        scrollToBottom()
     }
 
     return (
         <>
             <div className='message-box-container'>
                 <div className='display-messages-container'>
-                    <DisplayMessages />
+                    <DisplayMessages endOfChatRef={endOfChatRef}/>
                 </div>
             </div>
                 <form className='input-container' onSubmit={handleSubmit}>
@@ -39,7 +50,7 @@ export default function MessagesBox({channelName}) {
                     className='new-message-input message-input'
                     onChange={(e) => setMessage(e.target.value)}
                     />
-                    <button type='submit'>click</button>
+                    <button disabled={!message} className='send-message' type='submit'> <SendIcon  /></button>
                 </form>
         </>
     )

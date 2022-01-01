@@ -45,6 +45,11 @@ export default function ConversationBar() {
         socket.on('delete_a_channel', (channel) => {
             dispatch(AC.deleteChannelToServerAC(channel.id, channel.server_id))
         })
+
+        return () => {
+            socket.disconnect();
+          }
+          
     },[])
 
     return (

@@ -41,3 +41,8 @@
     border: none;
     background-color: #B18FCF;
 }
+
+.edit-btn-channel{
+    padding-right: 3.9rem;
+    cursor: pointer;
+}

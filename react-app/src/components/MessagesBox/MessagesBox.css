@@ -2,12 +2,22 @@
     background-color: #494850;
     overflow-y: auto;
     height: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.message-box-container::-webkit-scrollbar{
+    display: none;
 }
 
 .input-container{
     justify-content: center;
     margin: .7rem;
     color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: .3rem !important;
 }
 
 .new-message-input{
@@ -30,8 +40,33 @@
 }
 
 .message{
-    width: 95%;
+    width: fit-content;
     margin-left: 1rem;
     margin-top: .54rem;
+    margin-bottom: 1rem;
     color: white;
+}
+
+.messages-displayed{
+    display: flex;
+    flex-direction: column;
+}
+
+.send-message{
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.send-message{
+    color: white;
+    position: relative;
+    right: 35px;
+    transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    transform: scale(.8);
+}
+
+.send-message:hover{
+    color: #B18FCF;
+    transform: scale(1.05);
 }

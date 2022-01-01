@@ -10,7 +10,10 @@ const NavBar = () => {
 
   let userButtons
   if(sessionUser) {
-    userButtons = <LogoutButton/>
+    userButtons = <div className='user-btns-container'>
+        <NavLink to='servers/1' className='nav-btn'>Home</NavLink>
+        <LogoutButton/>
+      </div>
   } else {
     userButtons = <div className='user-btns-container'>
       <LoginModal/>

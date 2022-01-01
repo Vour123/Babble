@@ -53,6 +53,10 @@
   fill: red;
 }
 
+.delete{
+  cursor: pointer;
+}
+
 .menu-primary-enter {
   position: absolute;
   transform: translateX(-110%);

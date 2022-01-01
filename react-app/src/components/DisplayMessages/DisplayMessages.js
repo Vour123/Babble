@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { getAllMessagesOfServer } from '../../store/server'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-export default function DisplayMessages() {
+export default function DisplayMessages({endOfChatRef}) {
     const dispatch = useDispatch();
     const { specificServerId, specificChannelId} = useParams()
     const specificServer = useSelector(state => state.server?.[specificServerId])
@@ -28,7 +28,7 @@ export default function DisplayMessages() {
             {messagesToChannel?.length != 0 ? <div className='messages-displayed'>
                 {messagesToChannel?.map((message) => {
                     return (
-                        <div key={message.id} className='message'>
+                        <div key={message.id} ref={endOfChatRef} className='message'>
                             {message?.id}
                             {message?.content}
                         </div>
