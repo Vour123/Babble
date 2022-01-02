@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import { deleteAServer } from '../../store/server';
 import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import ShareIcon from '@mui/icons-material/Share';
 
 export default function DropDownServer() {
     const [open, setOpen] = useState(false)
@@ -25,11 +26,16 @@ function DropDownMenu({setOpen}) {
     const dispatch = useDispatch();
     const history = useHistory();
     const { specificServerId } = useParams();
+    // const inviteLink = ``
     
     const handleDelete = (e) => {
         dispatch(deleteAServer(specificServerId))
         history.push('/servers/1')
         setOpen(false)
+    }
+
+    const copyInviteLink = () => {
+
     }
 
 
@@ -47,6 +53,7 @@ function DropDownMenu({setOpen}) {
         <div className='drop-down'>
             <CSSTransition in={activeMenu === 'main'} unmountOnExit timeout={500} classNames='menu-primary'>
                 <div className='menu'>
+                    <DropDownItem leftIcon={<ShareIcon/>}><div onClick={copyInviteLink}>Click to copy invite link</div></DropDownItem>
                     <DropDownItem leftIcon={<span className="material-icons-outlined">edit</span>}> <ServerEditModal setOpen={setOpen}/> </DropDownItem>
                     <DropDownItem className='delete' goToMenu='edit' leftIcon={<span className="material-icons-outlined trash">delete</span>}>Delete Server</DropDownItem>
                 </div>
