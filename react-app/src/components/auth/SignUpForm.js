@@ -18,6 +18,24 @@ const SignUpForm = () => {
   const userServerY = useSelector(state => state.server)
   const dispatch = useDispatch();
 
+  const validator = () => {
+    let error = [];
+    if(username.length >= 16) {
+      error.push('. : Please enter a username that is 15 or less characters')
+    } else if(username.length < 3){
+        error.push('. : Please enter a username longer than 3 characters')
+      }
+    if(password.length < 6) {
+      error.push('. : Password must be at least 7 characters')
+    } else if (password.length > 255) {
+      error.push('. : Password is too long')
+    }
+    if(email.length > 255) {
+      error.push('. : Email is too long')
+    }
+    return error;
+  }
+
   let userServer;
   if(userServerY) {
     userServer = Object.values(userServerY);
@@ -29,17 +47,22 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword) {
-      await dispatch({type: 'logout'})
-      const data = await dispatch(signUp(username, email, password));
-      await dispatch(getAllServers())
-      if (data) {
-        setErrors(data)
-      } else {
-        history.push('/servers/1')
-      }
+    const errorsArr = validator()
+    if(errorsArr.length) {
+      setErrors(errorsArr)
     } else {
-      setErrors([' . : Passwords do not match'])
+      if (password === repeatPassword) {
+        await dispatch({type: 'logout'})
+        const data = await dispatch(signUp(username, email, password));
+        await dispatch(getAllServers())
+        if (data) {
+          setErrors(data)
+        } else {
+          history.push('/servers/1')
+        }
+      } else {
+        setErrors([' . : Passwords do not match'])
+      }
     }
   };
 
@@ -82,7 +105,7 @@ const SignUpForm = () => {
           value={username}
         ></input>
         <input
-          type='text'
+          type='email'
           placeholder='Email'
           onChange={updateEmail}
           className='signup-modal-input email-input'
