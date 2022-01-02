@@ -9,6 +9,7 @@ import './MessagesBox.css'
 export default function MessagesBox({channelName}) {
     const [message, setMessage] = useState('');
     const endOfChatRef = useRef(null)
+    // const bottomOfMessages = useRef(document.getElementById('scroll-to-here'))
     const sessionUser= useSelector(state => state.session)
     const userId = sessionUser?.user.id
     const { specificServerId, specificChannelId } = useParams() 
@@ -21,10 +22,19 @@ export default function MessagesBox({channelName}) {
         });
     }
 
-    // useEffect(() => {
-    //     // scrollToBottom();
-    // },[])
+    // const startAtBottom = () => {
+    //     bottomOfMessages.current.scrollIntoView();
+    // }
 
+    // const messageBox = document.getElementById('scroll-to-here')
+
+    useEffect(() => {
+        // if(messageBox){
+        //     messageBox.scrollIntoView();
+        // }
+        // startAtBottom()
+    })
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         const messageInformation = {
@@ -52,8 +62,9 @@ export default function MessagesBox({channelName}) {
                     value={message}
                     className='new-message-input message-input'
                     onChange={(e) => setMessage(e.target.value)}
+                    disabled={!specificChannelId}
                     />
-                    <button disabled={!message} className='send-message' type='submit'> <SendIcon  /></button>
+                    <button disabled={!message} className='send-message' type='submit'><SendIcon  /></button>
                 </form>
         </>
     )

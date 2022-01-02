@@ -9,6 +9,8 @@ const UPDATE_CHANNEL_TO_SERVER = 'channel/UPDATE_CHANNEL_TO_SERVER';
 const ADD_MEMBER_TO_SERVER = 'member/ADD_MEMBER_TO_SERVER';
 const GET_ALL_MESSAGES = 'messages/GET_ALL_MESSAGES';
 const POST_A_MESSAGE = 'messages/POST_A_MESSAGE';
+const UPDATE_A_MESSAGE = 'messages/UPDATE_A_MESSAGE';
+const DELETE_A_MESSAGE = 'messages/DELETE_A_MESSAGE';
 
 export const getAllServersAC = (servers) => ({
     type: GET_ALL_SERVERS,
@@ -71,6 +73,18 @@ export const postMessageToServerAC = (messages, serverId) => ({
   payload: messages,
   serverId
 })
+
+export const updateAMessageAC = (messages, serverId) => ({
+  type: UPDATE_A_MESSAGE,
+  payload: messages,
+  serverId
+})
+
+export const deleteAMessageAC = (messages) => ({
+  type: DELETE_A_MESSAGE,
+  payload: messages,
+})
+
 
  
 export const getAllServers = () => async (dispatch) => {
@@ -272,6 +286,45 @@ export const postMessageToServer = (messageInformation, serverId) => async(dispa
     }
 }
 
+export const updateAMessage = (messageInformation, serverId) => async (dispatch) => {
+  const { channel_id, message_id } = messageInformation;
+  const response = await fetch(`/api/servers/${serverId}/${channel_id}/${message_id}`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(messageInformation)})
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(updateAMessageAC(data, serverId))
+      return data;
+    } else if (response.status < 500) { 
+      const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
+    } else {
+      return ['An error occurred. Please try again.']
+    }
+}
+
+export const deleteAMessage = (messageInformation) => async (dispatch) => {
+  const { channel_id, message_id, server_id } = messageInformation;
+  const response = await fetch(`/api/servers/${+server_id}/${+channel_id}/${+message_id}/`, {
+    method: "DELETE"})
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data, 'this is the data');
+      dispatch(deleteAMessageAC(messageInformation))
+      return data;
+    } else if (response.status < 500) { 
+      const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
+    } else {
+      return ['An error occurred. Please try again.']
+    }
+}
+
 export default function reducer(state = {} , action) {
     let newState;
     switch(action.type){
@@ -318,6 +371,13 @@ export default function reducer(state = {} , action) {
         case POST_A_MESSAGE:
           newState = {...state}
           newState[action.serverId].channels[action.payload.channel_id].messages[action.payload.id] = action.payload
+          return newState;
+        // case UPDATE_A_MESSAGE:
+        //   newState = {...state}
+        //   return newState;
+        case DELETE_A_MESSAGE:
+          newState = {...state};
+          delete newState[action.payload.server_id].channels[action.payload.channel_id].messages[action.payload.message_id]
           return newState;
         case 'logout':
           newState = null

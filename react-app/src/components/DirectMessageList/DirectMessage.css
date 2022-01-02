@@ -7,9 +7,11 @@
 }
 
 .direct-message-image{
-   width: 3vw;
-   min-height: 2vh;
-   border-radius: 10px;
+   width: 35px;
+   min-height: 30px;
+   border-radius: 3px;
+   background-size: 100%;
+   background-repeat: no-repeat;
 }
 
 .direct-messages-container{
@@ -31,6 +33,7 @@
     gap: .5rem;
     text-decoration: none;
     transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    padding: .3rem 0;
 }
 
 .single-direct-message-box:hover{
@@ -41,7 +44,6 @@
 .private-servers{
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     width: 100%;
 }
 
