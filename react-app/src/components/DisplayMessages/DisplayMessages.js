@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getAllMessagesOfServer } from '../../store/server'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 export default function DisplayMessages({endOfChatRef}) {
     const dispatch = useDispatch();
+    const [messageId, setMessageId] = useState('')
     const { specificServerId, specificChannelId} = useParams()
     const specificServer = useSelector(state => state.server?.[specificServerId])
+    const user = useSelector(state => state.session.user)
 
     let channelsToServer;
     let specificChannel;
@@ -28,10 +30,25 @@ export default function DisplayMessages({endOfChatRef}) {
             {messagesToChannel?.length != 0 ? <div className='messages-displayed'>
                 {messagesToChannel?.map((message) => {
                     return (
-                        <div key={message.id} ref={endOfChatRef} className='message'>
-                            {message?.id}
-                            {message?.content}
-                        </div>
+                        <>
+                            {message.owner.id === user.id ? 
+                            <div key={message.id} ref={endOfChatRef} onMouseEnter={() => setMessageId(message.id)} onMouseLeave={() => setMessageId('')} className='message'>
+                                {/* {message?.owner.image_url} */}
+                                <div className='actual-message-content'>
+                                    {message?.id}
+                                    {message?.content}
+                                </div>
+                                <div className='action-btns-message'>
+                                    {message.id === messageId ? 'trash' : null}
+                                </div>
+                            </div> 
+                            : 
+                            <div key={message.id} ref={endOfChatRef} className='message'>
+                                {/* {message?.owner.image_url} */}
+                                {message?.id}
+                                {message?.content}
+                            </div>}
+                        </>
                     )
                 })}
                 <div id='scroll-to-here'></div>

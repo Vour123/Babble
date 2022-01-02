@@ -9,6 +9,7 @@ import './MessagesBox.css'
 export default function MessagesBox({channelName}) {
     const [message, setMessage] = useState('');
     const endOfChatRef = useRef(null)
+    // const bottomOfMessages = useRef(document.getElementById('scroll-to-here'))
     const sessionUser= useSelector(state => state.session)
     const userId = sessionUser?.user.id
     const { specificServerId, specificChannelId } = useParams() 
@@ -21,17 +22,19 @@ export default function MessagesBox({channelName}) {
         });
     }
 
-    const messageBox = document.getElementById('scroll-to-here')
+    // const startAtBottom = () => {
+    //     bottomOfMessages.current.scrollIntoView();
+    // }
+
+    // const messageBox = document.getElementById('scroll-to-here')
 
     useEffect(() => {
         // if(messageBox){
         //     messageBox.scrollIntoView();
         // }
+        // startAtBottom()
     })
     
-    console.log('message bottom', messageBox);
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const messageInformation = {

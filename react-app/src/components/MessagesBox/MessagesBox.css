@@ -40,11 +40,16 @@
 }
 
 .message{
-    width: fit-content;
-    margin-left: 1rem;
-    margin-top: .54rem;
-    margin-bottom: 1rem;
+    width: 100%;
+    padding: 1rem;
     color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.message:hover{
+    background-color: #676769;
 }
 
 .messages-displayed{

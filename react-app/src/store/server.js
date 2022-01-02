@@ -310,7 +310,7 @@ export const updateAMessage = (messageInformation, serverId) => async (dispatch)
 export const deleteAMessage = (messageInformation, serverId) => async (dispatch) => {
   const { channel_id, message_id } = messageInformation;
   const response = await fetch(`/api/servers/${serverId}/${channel_id}/${message_id}`, {
-    method: "POST",
+    method: "DELETE ",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(messageInformation)})
     if (response.ok) {
