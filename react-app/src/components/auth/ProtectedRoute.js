@@ -15,7 +15,7 @@ const ProtectedRoute = props => {
           <ServerListBar />
           <ConversationBar />
           <ChannelNameBar />
-          {(user)? props.children : <Redirect to='/' />}
+          {(user) ? props.children : <Redirect to='/' />}
         </Route>
       </div>
     </>
