@@ -36,10 +36,7 @@ const SignUpForm = () => {
       if (data) {
         setErrors(data)
       } else {
-        if(userServer) {
-          console.log('this is user server', userServer)
-          history.push(`/servers/${userServer[0].id}`)
-        }
+        history.push('/servers/1')
       }
     } else {
       setErrors([' . : Passwords do not match'])

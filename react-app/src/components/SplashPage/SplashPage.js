@@ -21,7 +21,7 @@ export default function SplashPage() {
             </div>
             <img className='splash-png' src={nomad}></img>
             <div className='repo-text'>Checkout Babble's GitHub repo
-                <a target='#' href='https://github.com/Vour123/Babble' className='github-repo-img-container'>
+                <a target='_blank' href='https://github.com/Vour123/Babble' className='github-repo-img-container'>
                     <GitHubIcon className='github-repo-img'/>
                 </a>
             </div>

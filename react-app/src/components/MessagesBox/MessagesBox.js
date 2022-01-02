@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { postMessageToServer } from '../../store/server';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -21,6 +21,9 @@ export default function MessagesBox({channelName}) {
         });
     }
 
+    // useEffect(() => {
+    //     // scrollToBottom();
+    // },[])
 
     const handleSubmit = async (e) => {
         e.preventDefault();

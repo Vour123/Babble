@@ -19,6 +19,9 @@ export default function DisplayMessages({endOfChatRef}) {
         }
     }
 
+    // const messageBox = document.getElementsByClassName('messages-displayed')
+    // window.scrollTo(0, messageBox.scrollHeight);
+
     useEffect(() => {
         dispatch(getAllMessagesOfServer(specificServerId, specificChannelId))
     },[dispatch, specificChannelId])
