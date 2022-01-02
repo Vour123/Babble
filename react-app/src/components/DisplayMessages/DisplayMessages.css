@@ -1,7 +1,9 @@
 .action-btns-message{
     display: flex;
     align-items: center;
+    position: absolute;
     justify-content: space-between;
+    right: 1rem;
 }
 
 .message-btn{
@@ -10,6 +12,6 @@
 }
 
 .message-btn:hover{
-    transform: scale(1);
+    transform: scale(.9);
     color: #B18FCF;
 }

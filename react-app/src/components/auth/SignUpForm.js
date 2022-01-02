@@ -12,7 +12,7 @@ const SignUpForm = () => {
   const [bool, setBool] = useState(false);
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  const [imageUrl, setImageUrl] = useState('')
+  const [image_url, setImageUrl] = useState('')
   const history = useHistory();
   const user = useSelector(state => state.session.user);
   const userServerY = useSelector(state => state.server)
@@ -53,7 +53,7 @@ const SignUpForm = () => {
     } else {
       if (password === repeatPassword) {
         await dispatch({type: 'logout'})
-        const data = await dispatch(signUp(username, email, password));
+        const data = await dispatch(signUp(username, email, password, image_url));
         await dispatch(getAllServers())
         if (data) {
           setErrors(data)
@@ -116,7 +116,7 @@ const SignUpForm = () => {
           placeholder='Image URL'
           onChange={updateImageUrl}
           className='signup-modal-input imageurl-input'
-          value={imageUrl}
+          value={image_url}
         ></input>
         <input
           type='password'
