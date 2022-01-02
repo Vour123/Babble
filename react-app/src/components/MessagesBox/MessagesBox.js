@@ -21,9 +21,16 @@ export default function MessagesBox({channelName}) {
         });
     }
 
-    // useEffect(() => {
-    //     // scrollToBottom();
-    // },[])
+    const messageBox = document.getElementById('scroll-to-here')
+
+    useEffect(() => {
+        // if(messageBox){
+        //     messageBox.scrollIntoView();
+        // }
+    })
+    
+    console.log('message bottom', messageBox);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,8 +59,9 @@ export default function MessagesBox({channelName}) {
                     value={message}
                     className='new-message-input message-input'
                     onChange={(e) => setMessage(e.target.value)}
+                    disabled={!specificChannelId}
                     />
-                    <button disabled={!message} className='send-message' type='submit'> <SendIcon  /></button>
+                    <button disabled={!message} className='send-message' type='submit'><SendIcon  /></button>
                 </form>
         </>
     )
