@@ -34,6 +34,10 @@ export default function ConversationBar() {
             dispatch(AC.postMessageToServerAC(message.data, message.server_id))
         })
 
+        socket.on('delete_a_message', (message) => {
+            dispatch(AC.deleteAMessageAC({server_id: message.server_id, channel_id: message.data.channel_id, message_id: message.data.message_id}))
+        })
+
         socket.on('add_a_channel', (newChannel) => {
             dispatch(AC.addChannelToServerAC(newChannel))
         })

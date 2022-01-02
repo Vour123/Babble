@@ -5,6 +5,8 @@ import './DirectMessage.css'
 
 export default function DirectMessageList() {
     const allServersObj = useSelector(state => state.server)
+    const user = useSelector(state => state.session.user)
+
 
     let allServers;
     if(allServersObj) {
