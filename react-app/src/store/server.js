@@ -312,7 +312,8 @@ export const deleteAMessage = (messageInformation) => async (dispatch) => {
     method: "DELETE"})
     if (response.ok) {
       const data = await response.json();
-      dispatch(deleteAMessageAC(data))
+      console.log(data, 'this is the data');
+      dispatch(deleteAMessageAC(messageInformation))
       return data;
     } else if (response.status < 500) { 
       const data = await response.json();
@@ -370,6 +371,13 @@ export default function reducer(state = {} , action) {
         case POST_A_MESSAGE:
           newState = {...state}
           newState[action.serverId].channels[action.payload.channel_id].messages[action.payload.id] = action.payload
+          return newState;
+        // case UPDATE_A_MESSAGE:
+        //   newState = {...state}
+        //   return newState;
+        case DELETE_A_MESSAGE:
+          newState = {...state};
+          delete newState[action.payload.server_id].channels[action.payload.channel_id].messages[action.payload.message_id]
           return newState;
         case 'logout':
           newState = null

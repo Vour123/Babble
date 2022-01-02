@@ -43,7 +43,7 @@ def edit_an_existing_message(server_id, channel_id, message_id):
     if form.validate_on_submit() and (current_user.id == Message.owner_id):
         existing_message.content = form.data['content']
         specific_server = Server.query.get(int(server_id))
-        server_information = server.to_dict()
+        server_information = specific_server.to_dict()
         db.session.commit()
         handle_edit_a_message(existing_message.to_dict(), server_information["id"])
         return message.to_dict()
