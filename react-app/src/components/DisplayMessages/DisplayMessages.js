@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAllMessagesOfServer } from '../../store/server'
+import ActionMessages  from './ActionMessages' 
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -39,7 +40,11 @@ export default function DisplayMessages({endOfChatRef}) {
                                     {message?.content}
                                 </div>
                                 <div className='action-btns-message'>
-                                    {message.id === messageId ? 'trash' : null}
+                                    {message.id === messageId ? <ActionMessages
+                                     messageId={message.id} 
+                                     channelId={specificChannelId}
+                                     serverId={specificServerId}
+                                     /> : null}
                                 </div>
                             </div> 
                             : 

@@ -80,10 +80,9 @@ export const updateAMessageAC = (messages, serverId) => ({
   serverId
 })
 
-export const deleteAMessageAC = (messages, serverId) => ({
+export const deleteAMessageAC = (messages) => ({
   type: DELETE_A_MESSAGE,
   payload: messages,
-  serverId
 })
 
 
@@ -307,15 +306,13 @@ export const updateAMessage = (messageInformation, serverId) => async (dispatch)
     }
 }
 
-export const deleteAMessage = (messageInformation, serverId) => async (dispatch) => {
-  const { channel_id, message_id } = messageInformation;
-  const response = await fetch(`/api/servers/${serverId}/${channel_id}/${message_id}`, {
-    method: "DELETE ",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(messageInformation)})
+export const deleteAMessage = (messageInformation) => async (dispatch) => {
+  const { channel_id, message_id, server_id } = messageInformation;
+  const response = await fetch(`/api/servers/${+server_id}/${+channel_id}/${+message_id}/`, {
+    method: "DELETE"})
     if (response.ok) {
       const data = await response.json();
-      dispatch(deleteAMessageAC(data, serverId))
+      dispatch(deleteAMessageAC(data))
       return data;
     } else if (response.status < 500) { 
       const data = await response.json();
