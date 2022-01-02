@@ -48,7 +48,7 @@ function DropDownMenu({setOpen}) {
             <CSSTransition in={activeMenu === 'main'} unmountOnExit timeout={500} classNames='menu-primary'>
                 <div className='menu'>
                     <DropDownItem leftIcon={<span className="material-icons-outlined">edit</span>}> <ServerEditModal setOpen={setOpen}/> </DropDownItem>
-                    <DropDownItem goToMenu='edit' leftIcon={<span className="material-icons-outlined trash">delete</span>}>Delete Server</DropDownItem>
+                    <DropDownItem className='delete' goToMenu='edit' leftIcon={<span className="material-icons-outlined trash">delete</span>}>Delete Server</DropDownItem>
                 </div>
             </CSSTransition>
 

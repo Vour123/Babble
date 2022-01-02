@@ -7,7 +7,7 @@ export default function ChannelEditModal({setOpen}) {
 
     return (
         <>
-            <div onClick={() => setShowModal(!showModal)}>Edit Channel</div>
+            <div className='edit-btn-channel' onClick={() => setShowModal(!showModal)}>Edit Channel</div>
             {showModal && (
                 <Modal onClose={() => setShowModal(!showModal)}>
                     <ChannelEditForm setOpen={setOpen} setShowModal={setShowModal}/>

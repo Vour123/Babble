@@ -41,3 +41,8 @@
     border: none;
     background-color: #B18FCF;
 }
+
+.edit-btn{
+    padding-right: 5rem;
+    cursor: pointer;
+}

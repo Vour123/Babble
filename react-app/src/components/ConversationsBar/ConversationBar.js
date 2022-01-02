@@ -29,6 +29,10 @@ export default function ConversationBar() {
             if(server.members.includes(sessionUser.user.id)) {
                 dispatch(AC.editAServerAC(server, server.id))
             }})
+        
+        socket.on('add_a_message', (message) => {
+            dispatch(AC.postMessageToServerAC(message.data, message.server_id))
+        })
 
         socket.on('add_a_channel', (newChannel) => {
             dispatch(AC.addChannelToServerAC(newChannel))
@@ -42,6 +46,10 @@ export default function ConversationBar() {
             dispatch(AC.deleteChannelToServerAC(channel.id, channel.server_id))
         })
 
+        return () => {
+            socket.disconnect();
+          }
+          
     },[])
 
     return (

@@ -77,6 +77,7 @@ export const getAllServers = () => async (dispatch) => {
   const response = await fetch('/api/servers/');
   if (response.ok) {
     const data = await response.json();
+    console.log('this is all serversDAta', data)
     dispatch(getAllServersAC(data.servers))
     return data.servers;
   } else if (response.status < 500) { 

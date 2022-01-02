@@ -10,9 +10,12 @@ export default function ChannelsList() {
     const dispatch = useDispatch()
     const serverInt = +specificServerId
     const server = useSelector(state => state.server);
+    const user = useSelector(state => state.session.user)
 
     let channelsToServer;
+    let serverOwnerId
     if(server) {
+        serverOwnerId = server[serverInt]?.owner_id
         channelsToServer = server[serverInt]?.channels
     }
 
@@ -33,11 +36,10 @@ export default function ChannelsList() {
             <NavLink to={`/servers/${serverInt}/${singleChannel.id}`} key={singleChannel.id} className='channel-title'>{singleChannel.name}</NavLink>
         )
     })
-    
 
     return (
         <div className='channels-container'>
-            <div className='channels-header'>Channels <AddChannel /></div>
+            <div className='channels-header'>Channels {serverOwnerId === user.id ? <AddChannel /> : null} </div>
                 {channelsMapped?.length ? channelsMapped : <div className='default-channel-msg'> Press the plus button to create a new channel!</div>}
         </div>
     )

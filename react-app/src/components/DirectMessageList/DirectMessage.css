@@ -1,8 +1,9 @@
 .title-direct-message{
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.3vw;
     display: flex;
     padding-left: 1rem;
+    margin-top: 1rem;
 }
 
 .direct-message-image{
@@ -43,3 +44,8 @@
     gap: 1rem;
     width: 100%;
 }
+
+/* .messages-displayed{
+    display: flex;
+    flex-direction: column-reverse;
+} */
