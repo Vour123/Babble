@@ -26,7 +26,6 @@ def upgrade():
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('image_url'),
     sa.UniqueConstraint('username')
     )
     op.create_table('servers',

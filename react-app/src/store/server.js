@@ -87,7 +87,7 @@ export const deleteAMessageAC = (messages) => ({
 
 
  
-export const getAllServers = () => async (dispatch) => {
+export const getAllServers = () => async(dispatch) => {
   const response = await fetch('/api/servers/');
   if (response.ok) {
     const data = await response.json();
@@ -231,13 +231,16 @@ export const updateChannelToServer = (channelInformation, serverId, channelId) =
 } 
 
 export const addMemberToServer = (serverId) => async(dispatch) => {
-  console.log('i hit this shit b')
+  console.log('i hit it')
   const response = await fetch(`/api/servers/${serverId}/members/`, {
     method: "POST",
     headers: {"Content-Type": "application/json"}})
     if (response.ok) {
       const data = await response.json();
-      dispatch(addMemberToServerAC(serverId))
+      // const response2 = await fetch(`/api/servers/`);
+      // const data2 = await response2.json()
+      // dispatch(getAllServersAC(data2.servers))
+      dispatch(addMemberToServerAC(data))
       return data;
     } else if (response.status < 500) { 
       const data = await response.json();
@@ -379,6 +382,12 @@ export default function reducer(state = {} , action) {
           newState = {...state};
           delete newState[action.payload.server_id].channels[action.payload.channel_id].messages[action.payload.message_id]
           return newState;
+        // case ADD_MEMBER_TO_SERVER:
+        //   newState = {...state}
+        //   console.log('acccccccccc', action.payload.server.id, action.payload)
+        //   newState[action.server.id].members = action.server.members
+        //   newState[action.server.id].members_list = action.server.members_list
+        //   return newState;
         case 'logout':
           newState = null
           return newState;
