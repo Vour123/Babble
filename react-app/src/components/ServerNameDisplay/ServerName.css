@@ -8,6 +8,7 @@
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.287);
   white-space: nowrap;
+  padding: 0 .4rem;
 }
 
 .drop-down-server{
@@ -31,10 +32,15 @@
   z-index: 1;
 }
 
+.inv-link{
+  font-size: 1.2rem;
+}
+
 .menu-item{
   height: 50px;
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 8px;
   padding: .5rem;
   text-decoration: none;
