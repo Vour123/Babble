@@ -26,21 +26,19 @@
 }
 
 .user-name{
-    position: absolute;
-    top: .7rem
+    margin-bottom: .35rem;
 }
 
 .user-box{
     display: flex;
     flex-direction: column!important;
     margin-left: 3rem;
+    width: 100%;
 }
 
 .edit-message-form{
-    margin-left: 3rem;
     display: flex;
     width: 95%;
-
 }
 
 .edit-message-input{
