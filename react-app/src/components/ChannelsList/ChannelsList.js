@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect, useState} from 'react'
 import AddChannel from '../AddChannel/AddChannel'
 import { getChannelsToServer } from '../../store/server'
 import { useSelector, useDispatch } from 'react-redux'
@@ -9,6 +9,7 @@ export default function ChannelsList() {
     const { specificServerId } = useParams()
     const dispatch = useDispatch()
     const serverInt = +specificServerId
+    // const [isLoaded, setIsLoaded] = useState(false)
     const server = useSelector(state => state.server);
     const user = useSelector(state => state.session.user)
 

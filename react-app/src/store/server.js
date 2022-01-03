@@ -285,15 +285,15 @@ export const postMessageToServer = (messageInformation, serverId) => async(dispa
     }
 }
 
-export const updateAMessage = (messageInformation, serverId) => async (dispatch) => {
-  const { channel_id, message_id } = messageInformation;
-  const response = await fetch(`/api/servers/${serverId}/${channel_id}/${message_id}`, {
-    method: "POST",
+export const updateAMessage = (messageInformation) => async (dispatch) => {
+  const { channel_id, message_id, server_id} = messageInformation;
+  const response = await fetch(`/api/servers/${server_id}/${channel_id}/${message_id}/`, {
+    method: "PUT",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(messageInformation)})
     if (response.ok) {
       const data = await response.json();
-      dispatch(updateAMessageAC(data, serverId))
+      dispatch(updateAMessageAC(data, server_id))
       return data;
     } else if (response.status < 500) { 
       const data = await response.json();
@@ -370,9 +370,10 @@ export default function reducer(state = {} , action) {
           newState = {...state}
           newState[action.serverId].channels[action.payload.channel_id].messages[action.payload.id] = action.payload
           return newState;
-        // case UPDATE_A_MESSAGE:
-        //   newState = {...state}
-        //   return newState;
+        case UPDATE_A_MESSAGE:
+          newState = {...state}
+          newState[action.serverId].channels[action.payload.channel_id].messages[action.payload.id] = action.payload;
+          return newState;
         case DELETE_A_MESSAGE:
           newState = {...state};
           delete newState[action.payload.server_id].channels[action.payload.channel_id].messages[action.payload.message_id]

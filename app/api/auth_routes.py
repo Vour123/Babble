@@ -64,7 +64,7 @@ def sign_up():
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password'],
-            image_url=form.data['image_url'],
+            image_url=form.data['image_url'] if form.data['image_url'] else "https://cdn.discordapp.com/attachments/897232495580414045/927094319511400498/placeholder.png"
         )
 
         db.session.add(user)

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAllMessagesOfServer } from '../../store/server'
+import { updateAMessage } from '../../store/server'
 import ActionMessages  from './ActionMessages' 
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -10,8 +11,8 @@ import './DisplayMessages.css'
 export default function DisplayMessages({endOfChatRef}) {
     const dispatch = useDispatch();
     const [messageId, setMessageId] = useState('')
-    const [messageIdX, setMessageIdX] = useState('')
     const [editMode, setEditMode] = useState(false)
+    const [message, setMessage] = useState('')
     const { specificServerId, specificChannelId} = useParams()
     const specificServer = useSelector(state => state.server?.[specificServerId])
     const user = useSelector(state => state.session.user)
@@ -29,6 +30,14 @@ export default function DisplayMessages({endOfChatRef}) {
 
     const handleEditSubmit = (e) => {
         e.preventDefault();
+        const messageInformation = {
+            content: message,
+            server_id: +specificServerId,
+            channel_id: +specificChannelId,
+            message_id: +messageId
+        }
+        dispatch(updateAMessage(messageInformation))
+        setEditMode(!editMode)
     }
 
     useEffect(() => {
@@ -47,8 +56,8 @@ export default function DisplayMessages({endOfChatRef}) {
                                 {message.id == messageId ? 
                                 <>
                                     <img className='user-image' src={message?.owner.image_url}></img>
-                                    <form className='edit-message-form'>
-                                        <input className='edit-message-input' type='text' defaultValue={message?.content}/>
+                                    <form className='edit-message-form' onSubmit={handleEditSubmit}>
+                                        <input className='edit-message-input' type='text' defaultValue={message?.content} onChange={(e) => setMessage(e.target.value)}/>
                                         <button type='submit' className='edit-message-btn'><CheckIcon/></button>
                                         <button onClick={() => setEditMode(!editMode)} className='delete-btn'><CancelIcon/></button>
                                     </form> 

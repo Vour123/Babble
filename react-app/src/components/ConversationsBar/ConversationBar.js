@@ -38,6 +38,10 @@ export default function ConversationBar() {
             dispatch(AC.deleteAMessageAC({server_id: message.server_id, channel_id: message.data.channel_id, message_id: message.data.message_id}))
         })
 
+        socket.on('edit_a_message', (message) => {
+            dispatch(AC.updateAMessageAC(message.data, message.server_id))
+        })
+
         socket.on('add_a_channel', (newChannel) => {
             dispatch(AC.addChannelToServerAC(newChannel))
         })
@@ -64,9 +68,9 @@ export default function ConversationBar() {
             <div className='channels-bar-container'>
                 <ChannelsList />
             </div>
-            <div className='direct-messages-container'>
+            {/* <div className='direct-messages-container'>
                 <DirectMessageList />
-            </div>
+            </div> */}
         </div>
     )
 }

@@ -64,7 +64,7 @@ def update_server(server_id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit() and current_user.id == specific_server.owner_id:
         specific_server.name = form.data['name']
-        specific_server.image_url = form.data['image_url']
+        specific_server.image_url = form.data['image_url'] if form.data['image_url'] else "https://cdn.discordapp.com/attachments/897232495580414045/927094319511400498/placeholder.png"
         db.session.commit()
         handle_edit_a_server(specific_server.to_dict())
         return specific_server.to_dict()
