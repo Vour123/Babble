@@ -41,12 +41,13 @@
 
 .message{
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
+    height: fit-content;
 }
 
 .message:hover{

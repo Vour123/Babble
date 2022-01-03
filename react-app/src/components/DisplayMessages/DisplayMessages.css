@@ -25,7 +25,14 @@
     outline: none;
 }
 
-.actual-message-content{
+.user-name{
+    position: absolute;
+    top: .7rem
+}
+
+.user-box{
+    display: flex;
+    flex-direction: column!important;
     margin-left: 3rem;
 }
 
