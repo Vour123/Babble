@@ -117,6 +117,7 @@ const SignUpForm = () => {
           onChange={updateImageUrl}
           className='signup-modal-input imageurl-input'
           value={image_url}
+          accept='.png, .jpg, .jpeg, .gif'
         ></input>
         <input
           type='password'
