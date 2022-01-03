@@ -1,5 +1,5 @@
 from flask import Blueprint, request 
-from flask_login.utils import login_required
+from flask_login.utils import expand_login_view, login_required
 from flask_login import login_required, current_user
 from flask_migrate import current
 from app.models import db, Server, Message, message
@@ -40,13 +40,13 @@ def edit_an_existing_message(server_id, channel_id, message_id):
     form = EditMessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     existing_message = Message.query.get(int(message_id))
-    if form.validate_on_submit() and (current_user.id == Message.owner_id):
+    if form.validate_on_submit() and existing_message.owner_id == current_user.id:
         existing_message.content = form.data['content']
         specific_server = Server.query.get(int(server_id))
         server_information = specific_server.to_dict()
         db.session.commit()
         handle_edit_a_message(existing_message.to_dict(), server_information["id"])
-        return message.to_dict()
+        return existing_message.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @message_routes.route('/<int:server_id>/<int:channel_id>/<int:message_id>/', methods=['DELETE'])

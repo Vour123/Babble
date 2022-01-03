@@ -2,11 +2,12 @@
   background-color: #2C2C34;
   min-height: 6vh;
   color: white;
-  font-size: 2vw;
+  font-size: 1.5vw;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.287);
+  white-space: nowrap;
 }
 
 .drop-down-server{

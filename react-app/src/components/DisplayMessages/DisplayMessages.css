@@ -15,3 +15,63 @@
     transform: scale(.9);
     color: #B18FCF;
 }
+
+.user-image{
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+}
+
+.actual-message-content{
+    margin-left: 3rem;
+}
+
+.edit-message-form{
+    margin-left: 3rem;
+    display: flex;
+    width: 95%;
+
+}
+
+.edit-message-input{
+    width: 100%;
+    padding: .4rem;
+    border: none;
+    outline: none;
+    background-color: #676769;
+    color: white;
+    border-radius: 15px;
+    border: 1px solid #9a9a9c
+}
+
+.edit-message-btn{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    color: white;
+    transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    transform: scale(.8);
+}
+
+.edit-message-btn:hover{
+    color: green;
+    transform: scale(1);
+}
+
+
+.delete-btn{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    color: white;
+    transition: all 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    transform: scale(.8);
+}
+
+.delete-btn:hover{
+    color: red;
+    transform: scale(1);
+}
