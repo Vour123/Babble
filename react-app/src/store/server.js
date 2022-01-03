@@ -231,6 +231,7 @@ export const updateChannelToServer = (channelInformation, serverId, channelId) =
 } 
 
 export const addMemberToServer = (serverId) => async(dispatch) => {
+  console.log('i hit this shit b')
   const response = await fetch(`/api/servers/${serverId}/members/`, {
     method: "POST",
     headers: {"Content-Type": "application/json"}})

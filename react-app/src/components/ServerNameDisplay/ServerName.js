@@ -15,7 +15,7 @@ export default function ServerName() {
 
     let serverOwnerId;
     if(specificServer) {
-        serverOwnerId = specificServer[specificServerId].owner_id
+        serverOwnerId = specificServer[specificServerId]?.owner_id
     }
 
     return (
