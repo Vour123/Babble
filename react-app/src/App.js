@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -41,6 +41,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/servers/:specificServerId/:specificChannelId'>
         </ProtectedRoute>
+        <Route>
+          <Redirect to='/'/>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

@@ -14,7 +14,7 @@ function LoginModal(){
     const demoLogin = async() => {
         await dispatch({type: 'logout'})
         await dispatch(login('demo@aa.io', 'password'));
-        await dispatch(getAllServers()).then(history.push(`/servers/1`))
+        await dispatch(getAllServers()).then(history.push(`/servers/1`)).then(() => dispatch(getChannelsToServer(1)))
     }
 
     return (
