@@ -41,6 +41,12 @@
     width: 95%;
 }
 
+.time-stamp{
+    margin-left: .2rem;
+    color: rgba(255, 255, 255, 0.383);
+    font-size: .7vw;
+}
+
 .edit-message-input{
     width: 100%;
     padding: .4rem;

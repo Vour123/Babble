@@ -4,6 +4,7 @@ import { updateAMessage } from '../../store/server'
 import ActionMessages  from './ActionMessages' 
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import moment from 'moment'
 import CheckIcon from '@mui/icons-material/Check';
 import CancelIcon from '@mui/icons-material/Cancel';
 import './DisplayMessages.css'
@@ -57,7 +58,7 @@ export default function DisplayMessages({endOfChatRef}) {
                                 <>
                                     <img className='user-image' src={message?.owner.image_url}></img>
                                     <div className='user-box'>
-                                        <div className='user-name'>{message.owner?.username}</div>
+                                        <div className='user-name'>{message.owner?.username}<span className='time-stamp'>{message.created_at ? moment(message.created_at).format("LT") : null}</span></div>
                                         <form className='edit-message-form' onSubmit={handleEditSubmit}>
                                             <input className='edit-message-input' type='text' defaultValue={message?.content} onChange={(e) => setMessage(e.target.value)}/>
                                             <button type='submit' className='edit-message-btn'><CheckIcon/></button>
@@ -69,7 +70,7 @@ export default function DisplayMessages({endOfChatRef}) {
                                 <>
                                     <img className='user-image' src={message?.owner.image_url}></img>
                                     <div className='user-box'>
-                                        <div className='user-name'>{message.owner?.username}</div>
+                                        <div className='user-name'>{message.owner?.username}<span className='time-stamp'>{message.created_at ? moment(message.created_at).format("LT") : null}</span></div>
                                         <div className='actual-message-content'>
                                             {message?.content}
                                         </div>
@@ -91,7 +92,7 @@ export default function DisplayMessages({endOfChatRef}) {
                             <div key={message.id} ref={endOfChatRef} onDoubleClick={() => setEditMode(!editMode)} onMouseOver={() => setMessageId(message.id)} onMouseLeave={() => setMessageId('')} className='message'>
                                 <img className='user-image' src={message?.owner.image_url}></img>
                                 <div className='user-box'>
-                                    <div className='user-name'>{message.owner?.username}</div>
+                                    <div className='user-name'>{message.owner?.username}<span className='time-stamp'>{message.created_at ? moment(message.created_at).format("LT") : null}</span></div>
                                     <div className='actual-message-content'>
                                         {message?.content}
                                     </div>
@@ -111,7 +112,7 @@ export default function DisplayMessages({endOfChatRef}) {
                             :<div key={message.id} ref={endOfChatRef} className='message'>
                                         <img className='user-image' src={message?.owner.image_url}></img>
                                         <div className='user-box'>
-                                            <div className='user-name'>{message.owner?.username}</div>
+                                            <div className='user-name'>{message.owner?.username}<span className='time-stamp'>{message.created_at ? moment(message.created_at).format("LT") : null}</span></div>
                                             <div className='actual-message-content'>
                                                 {message?.content}
                                             </div>
