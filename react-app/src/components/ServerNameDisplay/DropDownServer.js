@@ -53,7 +53,7 @@ function DropDownMenu({setOpen}) {
         <div className='drop-down'>
             <CSSTransition in={activeMenu === 'main'} unmountOnExit timeout={500} classNames='menu-primary'>
                 <div className='menu'>
-                    <DropDownItem leftIcon={<ShareIcon/>}><div className='inv-link' onClick={copyInviteLink}>Click to copy invite link</div></DropDownItem>
+                    {/* <DropDownItem leftIcon={<ShareIcon/>}><div className='inv-link' onClick={copyInviteLink}>Click to copy invite link</div></DropDownItem> */}
                     <DropDownItem leftIcon={<span className="material-icons-outlined">edit</span>}> <ServerEditModal setOpen={setOpen}/> </DropDownItem>
                     <DropDownItem className='delete' goToMenu='edit' leftIcon={<span className="material-icons-outlined trash">delete</span>}>Delete Server</DropDownItem>
                 </div>

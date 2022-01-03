@@ -33,6 +33,10 @@ const SignUpForm = () => {
     if(email.length > 255) {
       error.push('. : Email is too long')
     }
+    if(!/\.(jpe?g|png|gif|bmp)/gi.test(image_url)) {
+      error.push('. : URL must contain jpg, jpeg, png extension within it')
+    }
+    
     return error;
   }
 

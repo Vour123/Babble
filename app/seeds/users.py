@@ -3,10 +3,11 @@ from app.models import db, User
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password', image_url='https://www.allthingsdogs.com/wp-content/uploads/2019/12/Red-Husky-Feature.jpg')
+    demo = User(username='Demo', email='demo@aa.io', password='password', image_url='https://www.allthingsdogs.com/wp-content/uploads/2019/12/Red-Husky-Feature.jpg')
+    user1 = User(username='Jose Cantu', email='jose@aa.io', password='password', image_url='https://res.cloudinary.com/dfswxjqrs/image/upload/v1641214093/profilepic_xz2fxk.jpg')
     
     db.session.add(demo)
+    db.session.add(user1)
     db.session.commit()
 
 

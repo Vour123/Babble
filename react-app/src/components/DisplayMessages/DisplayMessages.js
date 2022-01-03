@@ -122,7 +122,7 @@ export default function DisplayMessages({endOfChatRef}) {
                     )
                 })}
                 <div id='scroll-to-here'></div>
-            </div> : <div className='message'>No messages here</div>}
+            </div> : <div className='message'>Be the first to send a message!</div>}
         </>
     )
 }

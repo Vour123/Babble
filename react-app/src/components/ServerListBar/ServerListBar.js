@@ -13,6 +13,7 @@ export default function ServerListBar() {
 
     let serverChecker = allServersY?.[specificServerId]
     
+    
     useEffect(() => {
         if(!serverChecker){
             if(isNaN(+specificServerId)){
