@@ -9,7 +9,6 @@ import './MessagesBox.css'
 export default function MessagesBox({channelName}) {
     const [message, setMessage] = useState('');
     const endOfChatRef = useRef(null)
-    // const bottomOfMessages = useRef(document.getElementById('scroll-to-here'))
     const sessionUser= useSelector(state => state.session)
     const userId = sessionUser?.user.id
     const { specificServerId, specificChannelId } = useParams() 
@@ -17,22 +16,21 @@ export default function MessagesBox({channelName}) {
 
     const scrollToBottom = () => {
         endOfChatRef.current.scrollIntoView({
-            behavior: "smooth",
+            behavior: "auto",
             block: "start"
         });
     }
 
-    // const startAtBottom = () => {
-    //     bottomOfMessages.current.scrollIntoView();
-    // }
+    const startAtBottom = () => {
+        const el = document.getElementById('scroll-to-here')
+        if(el) {
+            el.scrollIntoView();
+        }
+    }
 
-    // const messageBox = document.getElementById('scroll-to-here')
 
     useEffect(() => {
-        // if(messageBox){
-        //     messageBox.scrollIntoView();
-        // }
-        // startAtBottom()
+        startAtBottom();
     })
     
     const handleSubmit = async (e) => {
@@ -45,7 +43,7 @@ export default function MessagesBox({channelName}) {
         if(messageInformation) {
             await dispatch(postMessageToServer(messageInformation, +specificServerId)).then(setMessage(''));
         }
-        scrollToBottom()
+        startAtBottom()
     }
 
     return (
@@ -64,7 +62,7 @@ export default function MessagesBox({channelName}) {
                     onChange={(e) => setMessage(e.target.value)}
                     disabled={!specificChannelId}
                     />
-                    <button disabled={!message} className='send-message' type='submit'><SendIcon  /></button>
+                    <button disabled={!message} className='send-message' type='submit'><SendIcon/></button>
                 </form>
         </>
     )
