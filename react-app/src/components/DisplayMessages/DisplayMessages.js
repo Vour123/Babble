@@ -56,17 +56,23 @@ export default function DisplayMessages({endOfChatRef}) {
                                 {message.id == messageId ? 
                                 <>
                                     <img className='user-image' src={message?.owner.image_url}></img>
-                                    <form className='edit-message-form' onSubmit={handleEditSubmit}>
-                                        <input className='edit-message-input' type='text' defaultValue={message?.content} onChange={(e) => setMessage(e.target.value)}/>
-                                        <button type='submit' className='edit-message-btn'><CheckIcon/></button>
-                                        <button onClick={() => setEditMode(!editMode)} className='delete-btn'><CancelIcon/></button>
-                                    </form> 
+                                    <div className='user-box'>
+                                        <div className='user-name'>{message.owner?.username}</div>
+                                        <form className='edit-message-form' onSubmit={handleEditSubmit}>
+                                            <input className='edit-message-input' type='text' defaultValue={message?.content} onChange={(e) => setMessage(e.target.value)}/>
+                                            <button type='submit' className='edit-message-btn'><CheckIcon/></button>
+                                            <button onClick={() => setEditMode(!editMode)} className='delete-btn'><CancelIcon/></button>
+                                        </form> 
+                                    </div>
                                 </>
                                 : 
                                 <>
                                     <img className='user-image' src={message?.owner.image_url}></img>
-                                    <div className='actual-message-content'>
-                                        {message?.content}
+                                    <div className='user-box'>
+                                        <div className='user-name'>{message.owner?.username}</div>
+                                        <div className='actual-message-content'>
+                                            {message?.content}
+                                        </div>
                                     </div>
 
                                     <div className='action-btns-message'>
@@ -84,8 +90,11 @@ export default function DisplayMessages({endOfChatRef}) {
                             : 
                             <div key={message.id} ref={endOfChatRef} onDoubleClick={() => setEditMode(!editMode)} onMouseOver={() => setMessageId(message.id)} onMouseLeave={() => setMessageId('')} className='message'>
                                 <img className='user-image' src={message?.owner.image_url}></img>
-                                <div className='actual-message-content'>
-                                    {message?.content}
+                                <div className='user-box'>
+                                    <div className='user-name'>{message.owner?.username}</div>
+                                    <div className='actual-message-content'>
+                                        {message?.content}
+                                    </div>
                                 </div>
 
                                 <div className='action-btns-message'>
@@ -101,8 +110,11 @@ export default function DisplayMessages({endOfChatRef}) {
                             </div> ]
                             :<div key={message.id} ref={endOfChatRef} className='message'>
                                         <img className='user-image' src={message?.owner.image_url}></img>
-                                        <div className='actual-message-content'>
-                                            {message?.content}
+                                        <div className='user-box'>
+                                            <div className='user-name'>{message.owner?.username}</div>
+                                            <div className='actual-message-content'>
+                                                {message?.content}
+                                            </div>
                                         </div>
                             </div>}
                         </>

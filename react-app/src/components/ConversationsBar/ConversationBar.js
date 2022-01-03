@@ -35,7 +35,7 @@ export default function ConversationBar() {
         })
 
         socket.on('delete_a_message', (message) => {
-            dispatch(AC.deleteAMessageAC({server_id: message.server_id, channel_id: message.data.channel_id, message_id: message.data.message_id}))
+            dispatch(AC.deleteAMessageAC({server_id: message.server_id, channel_id: message.data.channel_id, message_id: message.data.id}))
         })
 
         socket.on('edit_a_message', (message) => {
